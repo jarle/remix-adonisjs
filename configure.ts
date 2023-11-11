@@ -43,6 +43,6 @@ export async function configure(command: Configure) {
   ])
 
   await codemods.updateRcFile((rcFile) => {
-    rcFile.addProvider('@jmathiesen/remix-adonisjs/providers/remix_provider.js')
+    rcFile.addProvider('@matstack/remix-adonisjs/remix_provider')
   })
 }
