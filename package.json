@@ -76,14 +76,8 @@
     "react-dom": "^18.2.0"
   },
   "peerDependenciesMeta": {},
-  "author": "Jarle Mathiesen <jarle.mathiesen@gmail.com>",
+  "author": "Jarle Mathiesen",
   "license": "MIT",
-  "keywords": [
-    "remix",
-    "adonis",
-    "adonisjs",
-    "adonis-framework"
-  ],
   "eslintConfig": {
     "extends": "@adonisjs/eslint-config/package"
   },
