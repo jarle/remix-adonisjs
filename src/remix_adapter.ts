@@ -9,9 +9,8 @@ import {
   createRequestHandler as createRemixRequestHandler,
   ServerBuild,
 } from '@remix-run/node'
-import { ReadableStream } from 'node:stream/web'
+import { ReadableStream, ReadableStreamDefaultReader } from 'node:stream/web'
 import { Readable } from 'node:stream'
-import { ReadableStreamDefaultReader } from 'stream/web'
 
 export type HandlerContext = {
   http: HttpContext
@@ -108,8 +107,8 @@ export async function sendRemixResponse(
  * Node readable stream: https://nodejs.org/api/stream.html#stream_readable_streams
  */
 export class ReadableWebToNodeStream extends Readable {
-  public bytesRead: number = 0
-  public released = false
+  bytesRead: number = 0
+  released = false
 
   private reader: ReadableStreamDefaultReader<any>
   private pendingRead: Promise<any> | undefined
@@ -119,7 +118,7 @@ export class ReadableWebToNodeStream extends Readable {
     this.reader = stream.getReader()
   }
 
-  public async _read() {
+  async _read() {
     // Should start pushing data into the queue
     // Read data from the underlying Web-API-readable-stream
     if (this.released) {
@@ -137,13 +136,13 @@ export class ReadableWebToNodeStream extends Readable {
     }
   }
 
-  public async waitForReadToComplete() {
+  async waitForReadToComplete() {
     if (this.pendingRead) {
       await this.pendingRead
     }
   }
 
-  public async close(): Promise<void> {
+  async close(): Promise<void> {
     await this.syncAndRelease()
   }
 
