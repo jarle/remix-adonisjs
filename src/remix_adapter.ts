@@ -1,18 +1,17 @@
 import { IncomingHttpHeaders } from 'node:http'
 
-import { Readable } from 'node:stream'
-
 import { Container } from '@adonisjs/core/container'
 import { HttpContext } from '@adonisjs/core/http'
 import { ContainerBindings } from '@adonisjs/core/types'
 import type { Request as AdonisRequest, Response as AdonisResponse } from '@adonisjs/http-server'
 import {
   AppLoadContext,
-  ServerBuild,
-  createReadableStreamFromReadable,
   createRequestHandler as createRemixRequestHandler,
+  ServerBuild,
 } from '@remix-run/node'
 import { ReadableStream } from 'node:stream/web'
+import { Readable } from 'node:stream'
+import { ReadableStreamDefaultReader } from 'stream/web'
 
 export type HandlerContext = {
   http: HttpContext
@@ -57,7 +56,7 @@ export function createRemixHeaders(requestHeaders: IncomingHttpHeaders): Headers
           headers.append(key, value)
         }
       } else {
-        headers.set(key, values)
+        headers.append(key, values)
       }
     }
   }
@@ -78,8 +77,11 @@ export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Req
   }
 
   if (req.method() !== 'GET' && req.method() !== 'HEAD') {
-    init.body = createReadableStreamFromReadable(req.request)
-    ;(init as { duplex: 'half' }).duplex = 'half'
+    // Assume that body stream has already been consumed
+    const raw = req.raw()
+    if (raw) {
+      init.body = Buffer.from(raw, 'utf-8')
+    }
   }
 
   return new Request(url.href, init)
@@ -92,33 +94,62 @@ export async function sendRemixResponse(
   res.response.statusMessage = nodeResponse.statusText
   res.status(nodeResponse.status)
 
-  nodeResponse.headers.forEach((value, key) => res.header(key, value))
+  nodeResponse.headers.forEach((value, key) => res.append(key, value))
 
   if (nodeResponse.body) {
-    res.stream(nodeReadableStream(nodeResponse.body))
+    res.stream(new ReadableWebToNodeStream(nodeResponse.body))
   }
 }
 
-const nodeReadableStream = (webReadableStream: ReadableStream) =>
-  new Readable({
-    async read() {
-      if (!webReadableStream.locked) {
-        const reader = webReadableStream.getReader()
-        let shouldRun = true
-        try {
-          while (shouldRun) {
-            const { done, value } = await reader.read()
+/**
+ * Converts a Web-API stream into Node stream.Readable class
+ * Node stream readable: https://nodejs.org/api/stream.html#stream_readable_streams
+ * Web API readable-stream: https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
+ * Node readable stream: https://nodejs.org/api/stream.html#stream_readable_streams
+ */
+export class ReadableWebToNodeStream extends Readable {
+  public bytesRead: number = 0
+  public released = false
 
-            if (done) {
-              this.push(null)
-              break
-            } else {
-              this.push(Buffer.from(value))
-            }
-          }
-        } finally {
-          reader.releaseLock()
-        }
-      }
-    },
-  })
+  private reader: ReadableStreamDefaultReader<any>
+  private pendingRead: Promise<any> | undefined
+
+  constructor(stream: ReadableStream) {
+    super()
+    this.reader = stream.getReader()
+  }
+
+  public async _read() {
+    // Should start pushing data into the queue
+    // Read data from the underlying Web-API-readable-stream
+    if (this.released) {
+      this.push(null) // Signal EOF
+      return
+    }
+    this.pendingRead = this.reader.read()
+    const data = await this.pendingRead
+    delete this.pendingRead
+    if (data.done || this.released) {
+      this.push(null) // Signal EOF
+    } else {
+      this.bytesRead += data.value.length
+      this.push(data.value)
+    }
+  }
+
+  public async waitForReadToComplete() {
+    if (this.pendingRead) {
+      await this.pendingRead
+    }
+  }
+
+  public async close(): Promise<void> {
+    await this.syncAndRelease()
+  }
+
+  private async syncAndRelease() {
+    this.released = true
+    await this.waitForReadToComplete()
+    this.reader.releaseLock()
+  }
+}
