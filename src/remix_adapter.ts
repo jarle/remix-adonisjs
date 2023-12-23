@@ -10,7 +10,6 @@ import {
   createReadableStreamFromReadable,
   createRequestHandler as createRemixRequestHandler,
 } from '@remix-run/node'
-import cloneable from 'cloneable-readable'
 import { ReadableWebToNodeStream } from './stream_conversion.js'
 
 export type HandlerContext = {
@@ -37,17 +36,17 @@ export function createRequestHandler({
   let handleRequest = createRemixRequestHandler(build, mode)
 
   return async (context: HandlerContext) => {
-    let request = createRemixRequest(context.http.request, context.http.response)
-    let loadContext = getLoadContext(context)
+    const request = createRemixRequest(context.http.request, context.http.response)
+    const loadContext = getLoadContext(context)
 
-    let response = await handleRequest(request, loadContext)
+    const response = await handleRequest(request, loadContext)
 
     await sendRemixResponse(context.http.response, response)
   }
 }
 
 export function createRemixHeaders(requestHeaders: IncomingHttpHeaders): Headers {
-  let headers = new Headers()
+  const headers = new Headers()
 
   for (let [key, values] of Object.entries(requestHeaders)) {
     if (values) {
@@ -64,26 +63,40 @@ export function createRemixHeaders(requestHeaders: IncomingHttpHeaders): Headers
 }
 
 export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Request {
-  let url = new URL(req.completeUrl(true))
+  const url = new URL(req.completeUrl(true))
 
   // Abort action/loaders once we can no longer write a response
-  let controller = new AbortController()
+  const controller = new AbortController()
   res.response.on('close', () => controller.abort())
 
-  let init: RequestInit = {
+  const init: RequestInit = {
     method: req.method(),
     headers: createRemixHeaders(req.headers()),
     signal: controller.signal,
   }
 
   if (req.method() !== 'GET' && req.method() !== 'HEAD') {
-    const clone = cloneable(req.request)
     init.body = createReadableStreamFromReadable(req.request)
     init.duplex = 'half'
-    setTimeout(() => {
-      clone.resume()
-    }, 0)
   }
+
+  res.response.on('close', () => {
+    controller.abort()
+  })
+
+  res.response.on('error', (err) => {
+    console.error('Error writing response', err)
+    controller.abort()
+  })
+
+  // if (req.method() !== 'GET' && req.method() !== 'HEAD') {
+  //   const clone = cloneable(req.request)
+  //   init.body = createReadableStreamFromReadable(req.request)
+  //   init.duplex = 'half'
+  //   setTimeout(() => {
+  //     clone.resume()
+  //   }, 0)
+  // }
 
   return new Request(url.href, init)
 }
