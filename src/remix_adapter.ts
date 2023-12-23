@@ -6,11 +6,12 @@ import { ContainerBindings } from '@adonisjs/core/types'
 import type { Request as AdonisRequest, Response as AdonisResponse } from '@adonisjs/http-server'
 import {
   AppLoadContext,
-  createRequestHandler as createRemixRequestHandler,
   ServerBuild,
+  createReadableStreamFromReadable,
+  createRequestHandler as createRemixRequestHandler,
 } from '@remix-run/node'
-import { ReadableStream, ReadableStreamDefaultReader } from 'node:stream/web'
-import { Readable } from 'node:stream'
+import cloneable from 'cloneable-readable'
+import { ReadableWebToNodeStream } from './stream_conversion.js'
 
 export type HandlerContext = {
   http: HttpContext
@@ -76,11 +77,12 @@ export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Req
   }
 
   if (req.method() !== 'GET' && req.method() !== 'HEAD') {
-    // Assume that body stream has already been consumed
-    const raw = req.raw()
-    if (raw) {
-      init.body = Buffer.from(raw, 'utf-8')
-    }
+    const clone = cloneable(req.request)
+    init.body = createReadableStreamFromReadable(req.request)
+    init.duplex = 'half'
+    setTimeout(() => {
+      clone.resume()
+    }, 0)
   }
 
   return new Request(url.href, init)
@@ -97,58 +99,5 @@ export async function sendRemixResponse(
 
   if (nodeResponse.body) {
     res.stream(new ReadableWebToNodeStream(nodeResponse.body))
-  }
-}
-
-/**
- * Converts a Web-API stream into Node stream.Readable class
- * Node stream readable: https://nodejs.org/api/stream.html#stream_readable_streams
- * Web API readable-stream: https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
- * Node readable stream: https://nodejs.org/api/stream.html#stream_readable_streams
- */
-export class ReadableWebToNodeStream extends Readable {
-  bytesRead: number = 0
-  released = false
-
-  private reader: ReadableStreamDefaultReader<any>
-  private pendingRead: Promise<any> | undefined
-
-  constructor(stream: ReadableStream) {
-    super()
-    this.reader = stream.getReader()
-  }
-
-  async _read() {
-    // Should start pushing data into the queue
-    // Read data from the underlying Web-API-readable-stream
-    if (this.released) {
-      this.push(null) // Signal EOF
-      return
-    }
-    this.pendingRead = this.reader.read()
-    const data = await this.pendingRead
-    delete this.pendingRead
-    if (data.done || this.released) {
-      this.push(null) // Signal EOF
-    } else {
-      this.bytesRead += data.value.length
-      this.push(data.value)
-    }
-  }
-
-  async waitForReadToComplete() {
-    if (this.pendingRead) {
-      await this.pendingRead
-    }
-  }
-
-  async close(): Promise<void> {
-    await this.syncAndRelease()
-  }
-
-  private async syncAndRelease() {
-    this.released = true
-    await this.waitForReadToComplete()
-    this.reader.releaseLock()
   }
 }
