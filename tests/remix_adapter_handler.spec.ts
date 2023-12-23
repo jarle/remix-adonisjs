@@ -1,38 +1,39 @@
 import { RequestFactory, ResponseFactory } from '@adonisjs/core/factories/http'
 import { test } from '@japa/runner'
 import { RequestOptions, ResponseOptions, createRequest, createResponse } from 'node-mocks-http'
-import http, { IncomingMessage, ServerResponse } from 'node:http'
+import { IncomingMessage, ServerResponse } from 'node:http'
 import supertest from 'supertest'
 import { createRemixRequest } from '../src/remix_adapter.js'
+import { httpServer } from './http_server.js'
 
 test.group('createRemixRequest Adapter Tests', () => {
   test('creates a valid Remix Request for GET method', async ({ assert }) => {
-    const server = http.createServer((req, res) => {
+    const { url } = await httpServer.create((req, res) => {
       const remixRequest = createRemixRequest(mergeReqNode(req), mergeResNode(res))
       assert.equal(remixRequest.method, 'GET')
       res.end()
     })
 
-    await supertest(server).get('/')
+    await supertest(url).get('/')
   })
 
   test('correctly handles non-GET/HEAD requests', async ({ assert }) => {
-    const server = http.createServer((req, res) => {
+    const { url } = await httpServer.create((req, res) => {
       const remixRequest = createRemixRequest(mergeReqNode(req), mergeResNode(res))
       assert.equal(remixRequest.method, 'POST')
       assert.equal(remixRequest.headers.get('content-type'), 'application/json')
       res.end()
     })
 
-    await supertest(server).post('/').send({ test: 'data' }).set('Content-Type', 'application/json')
+    await supertest(url).post('/').send({ test: 'data' }).set('Content-Type', 'application/json')
   })
 
   test('aborts the request when the response is closed', async (_params, done) => {
-    const server = http.createServer((req, res) => {
+    const { url } = await httpServer.create((req, res) => {
       const remixRequest = createRemixRequest(mergeReqNode(req), mergeResNode(res))
 
       remixRequest.signal.addEventListener('abort', () => {
-        done('Request signal was never aborted')
+        done()
       })
 
       // Handle the request to ensure it's fully established before closing the response
@@ -43,11 +44,11 @@ test.group('createRemixRequest Adapter Tests', () => {
       })
     })
 
-    await supertest(server).post('/').send({ test: 'data' }).expect(200) // Expecting 200 OK, but the server will close the connection
+    await supertest(url).post('/').send({ test: 'data' }).expect(200) // Expecting 200 OK, but the server will close the connection
   }).waitForDone()
 
   test('handles cloned readable stream without memory leaks', async ({ assert }) => {
-    const server = http.createServer((req, res) => {
+    const { url } = await httpServer.create((req, res) => {
       const remixRequest = createRemixRequest(mergeReqNode(req), mergeResNode(res))
 
       const reader = remixRequest.body!.getReader()
@@ -64,20 +65,20 @@ test.group('createRemixRequest Adapter Tests', () => {
       })
     })
 
-    await supertest(server)
+    await supertest(url)
       .post('/')
       .send({ data: 'streaming data' })
       .set('Content-Type', 'application/json')
   })
 
   test('ensures URL is correctly formed', async ({ assert }) => {
-    const server = http.createServer((req, res) => {
+    const { url } = await httpServer.create((req, res) => {
       const remixRequest = createRemixRequest(mergeReqNode(req), mergeResNode(res))
       assert.equal(remixRequest.url, `http://${req.headers.host}${req.url}`)
       res.end()
     })
 
-    await supertest(server).get('/')
+    await supertest(url).get('/')
   })
 })
 
