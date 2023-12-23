@@ -163,7 +163,7 @@ test.group('ReadableWebToNodeStream Memory Leak Checks', () => {
     const nodeStream = new ReadableWebToNodeStream(mockStream)
 
     let chunkCount = 0
-    nodeStream.on('data', (chunk) => {
+    nodeStream.on('data', (_chunk) => {
       chunkCount++
       if (chunkCount === 5000) {
         nodeStream.destroy(new Error('Interruption error'))
