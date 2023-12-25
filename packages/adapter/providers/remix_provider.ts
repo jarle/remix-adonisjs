@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { RequestHandler, createRequestHandler } from '../src/remix_adapter.js'
 
-import { BriskRoute, HttpContext, Route } from '@adonisjs/core/http'
+import { HttpContext } from '@adonisjs/core/http'
 import { ApplicationService } from '@adonisjs/core/types'
 import { broadcastDevReady } from '@remix-run/node'
 import '../src/types/main.js'
@@ -16,10 +16,6 @@ declare module '@adonisjs/core/http' {
   interface HttpContext {
     remixHandler: () => Promise<void>
   }
-
-  interface BriskRoute {
-    remix(): Route
-  }
 }
 
 export default class RemixProvider {
@@ -30,7 +26,9 @@ export default class RemixProvider {
 
   async ready() {
     if (this.app.inDev && this.app.getEnvironment() === 'web') {
-      broadcastDevReady(await import(this.remixBundle)).catch(console.error)
+      broadcastDevReady(await import(this.remixBundle)).catch((error) => {
+        console.error("Couldn't connect to Remix dev server", error)
+      })
     }
   }
 
@@ -41,7 +39,6 @@ export default class RemixProvider {
       getLoadContext: (context) => context,
     })
     const app = this.app
-
     HttpContext.getter(
       'remixHandler',
       function (this: HttpContext) {
@@ -53,21 +50,5 @@ export default class RemixProvider {
       },
       true
     )
-
-    BriskRoute.macro('remix', function (this: BriskRoute) {
-      return this.setHandler(({ remixHandler }) => {
-        return remixHandler()
-      })
-    })
-  }
-
-  async register() {
-    const build = await import(this.remixBundle)
-    this.app.container.bind('remix', async () => {
-      return createRequestHandler({
-        build,
-        getLoadContext: (context) => context,
-      })
-    })
   }
 }

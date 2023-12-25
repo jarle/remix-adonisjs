@@ -13,8 +13,8 @@ export default function Page() {
   return (
     <div>
       <h1>Profile</h1>
-      <p id="username">Username: {userName}</p>
-      <p id="email">Email: {email}</p>
+      <p id="name">{userName}</p>
+      <p id="email">{email}</p>
     </div>
   )
 }
