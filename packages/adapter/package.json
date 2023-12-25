@@ -3,7 +3,7 @@
   "description": "An adapter for using Remix with AdonisJS",
   "version": "0.0.9",
   "engines": {
-    "node": ">=18.16.0"
+    "node": ">=20.10.0"
   },
   "main": "build/index.js",
   "type": "module",
