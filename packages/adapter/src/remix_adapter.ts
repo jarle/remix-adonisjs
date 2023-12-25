@@ -87,16 +87,15 @@ export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Req
   return new Request(url.href, init)
 }
 
-export async function sendRemixResponse(res: AdonisResponse, nodeResponse: Response) {
-  res.response.statusMessage = nodeResponse.statusText
-  res.status(nodeResponse.status)
+export async function sendRemixResponse(res: AdonisResponse, webResponse: Response) {
+  res.response.statusMessage = webResponse.statusText
+  res.status(webResponse.status)
 
-  nodeResponse.headers.forEach((value, key) => res.append(key, value))
+  webResponse.headers.forEach((value, key) => res.append(key, value))
 
-  if (nodeResponse.body) {
-    res.lazyBody = {
-      stream: [new ReadableWebToNodeStream(nodeResponse.body)],
-    }
+  if (webResponse.body) {
+    res.stream(new ReadableWebToNodeStream(webResponse.body))
+    res.finish()
   } else {
     res.finish()
   }
