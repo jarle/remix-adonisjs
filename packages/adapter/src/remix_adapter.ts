@@ -41,7 +41,7 @@ export function createRequestHandler({
 
     const response = await handleRequest(request, loadContext)
 
-    await sendRemixResponse(context.http.response, response)
+    sendRemixResponse(context.http.response, response)
   }
 }
 
@@ -87,16 +87,17 @@ export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Req
   return new Request(url.href, init)
 }
 
-export async function sendRemixResponse(
-  res: AdonisResponse,
-  nodeResponse: Response
-): Promise<void> {
+export async function sendRemixResponse(res: AdonisResponse, nodeResponse: Response) {
   res.response.statusMessage = nodeResponse.statusText
   res.status(nodeResponse.status)
 
   nodeResponse.headers.forEach((value, key) => res.append(key, value))
 
   if (nodeResponse.body) {
-    res.stream(new ReadableWebToNodeStream(nodeResponse.body))
+    res.lazyBody = {
+      stream: [new ReadableWebToNodeStream(nodeResponse.body)],
+    }
+  } else {
+    res.finish()
   }
 }
