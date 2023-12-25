@@ -15,13 +15,13 @@ export async function configure(command: Configure) {
 
   const devDependencies = ['@remix-run/dev', '@types/react', '@types/react-dom']
 
-  await command.installPackages(
+  await codemods.installPackages(
     dependencies.map((name) => ({
       name,
       isDevDependency: false,
     }))
   )
-  await command.installPackages(
+  await codemods.installPackages(
     devDependencies.map((name) => ({
       name,
       isDevDependency: true,
@@ -32,15 +32,6 @@ export async function configure(command: Configure) {
   await command.publishStub('root.tsx.stub')
   await command.publishStub('remix.config.js.stub')
   await command.publishStub('remix.env.d.ts.stub')
-  await command.publishStub('remix_middleware.ts.stub', {
-    entity: command.app.generators.createEntity('remix'),
-  })
-  await codemods.registerMiddleware('router', [
-    {
-      name: 'remix',
-      path: '#middleware/remix_middleware',
-    },
-  ])
 
   await codemods.updateRcFile((rcFile) => {
     rcFile.addProvider('@matstack/remix-adonisjs/remix_provider')
