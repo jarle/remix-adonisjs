@@ -1,7 +1,7 @@
 {
   "name": "@matstack/remix-adonisjs",
   "description": "An adapter for using Remix with AdonisJS",
-  "version": "0.0.3",
+  "version": "0.0.8",
   "engines": {
     "node": ">=18.16.0"
   },
@@ -37,14 +37,13 @@
     "precompile": "npm run lint",
     "prepublishOnly": "npm run build",
     "quick:test": "node --enable-source-maps --loader=ts-node/esm bin/test.ts",
-    "release": "np",
+    "release": "npm version patch --force && npm publish",
     "test": "node --loader ts-node/esm --enable-source-maps bin/test.ts --tags @active",
     "typecheck": "tsc --noEmit",
     "version": "npm run build"
   },
   "dependencies": {
-    "@poppinss/utils": "^6.7.0",
-    "cloneable-readable": "^3.0.0"
+    "@poppinss/utils": "^6.7.0"
   },
   "devDependencies": {
     "@adonisjs/core": "^6.1.5-33",
