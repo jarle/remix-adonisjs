@@ -9,6 +9,4 @@
 
 import router from '@adonisjs/core/services/router'
 
-router.any('*', async ({ remix }) => {
-  return remix()
-})
+router.on('*').remix()

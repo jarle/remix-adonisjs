@@ -3,7 +3,7 @@
   "compilerOptions": {
     "rootDir": "./",
     "outDir": "./build",
-    "composite": true,
+    "composite": true
   },
   "declaration": true
 }
