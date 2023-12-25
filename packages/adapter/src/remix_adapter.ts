@@ -68,6 +68,10 @@ export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Req
   // Abort action/loaders once we can no longer write a response
   const controller = new AbortController()
   res.response.on('close', () => controller.abort())
+  res.response.on('error', (err) => {
+    console.error('Error writing response', err)
+    controller.abort()
+  })
 
   const init: RequestInit = {
     method: req.method(),
@@ -79,24 +83,6 @@ export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Req
     init.body = createReadableStreamFromReadable(req.request)
     init.duplex = 'half'
   }
-
-  res.response.on('close', () => {
-    controller.abort()
-  })
-
-  res.response.on('error', (err) => {
-    console.error('Error writing response', err)
-    controller.abort()
-  })
-
-  // if (req.method() !== 'GET' && req.method() !== 'HEAD') {
-  //   const clone = cloneable(req.request)
-  //   init.body = createReadableStreamFromReadable(req.request)
-  //   init.duplex = 'half'
-  //   setTimeout(() => {
-  //     clone.resume()
-  //   }, 0)
-  // }
 
   return new Request(url.href, init)
 }

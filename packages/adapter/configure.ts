@@ -15,13 +15,13 @@ export async function configure(command: Configure) {
 
   const devDependencies = ['@remix-run/dev', '@types/react', '@types/react-dom']
 
-  await command.installPackages(
+  await codemods.installPackages(
     dependencies.map((name) => ({
       name,
       isDevDependency: false,
     }))
   )
-  await command.installPackages(
+  await codemods.installPackages(
     devDependencies.map((name) => ({
       name,
       isDevDependency: true,
@@ -42,6 +42,7 @@ export async function configure(command: Configure) {
     },
   ])
 
+  // TODO: not sure about this one
   await codemods.updateRcFile((rcFile) => {
     rcFile.addProvider('@matstack/remix-adonisjs/remix_provider')
   })

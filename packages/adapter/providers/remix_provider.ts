@@ -1,7 +1,7 @@
-import { ApplicationService } from '@adonisjs/core/types'
 import path from 'node:path'
 import { RequestHandler, createRequestHandler } from '../src/remix_adapter.js'
 
+import { ApplicationService } from '@adonisjs/core/types'
 import { broadcastDevReady } from '@remix-run/node'
 import '../src/types/main.js'
 
@@ -19,7 +19,7 @@ export default class RemixProvider {
 
   async ready() {
     if (this.app.inDev && this.app.getEnvironment() === 'web') {
-      broadcastDevReady(await import(this.remixBundle))
+      broadcastDevReady(await import(this.remixBundle)).catch(console.error)
     }
   }
 

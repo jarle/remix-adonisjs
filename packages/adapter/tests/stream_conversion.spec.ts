@@ -140,8 +140,8 @@ test.group('ReadableWebToNodeStream Error Handling', () => {
     })
 
     try {
-      for await (const chunk of nodeStream) {
-        // process chunk
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      for await (const _chunk of nodeStream) {
       }
     } catch (error) {
       // Catch errors thrown during iteration over the stream
