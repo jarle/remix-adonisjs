@@ -8,7 +8,7 @@
     "start": "node bin/server.js",
     "build": "remix build && node ace build",
     "dev": "PORT=3000 remix dev --manual -c \"node ace serve --watch\"",
-    "test": "node ace test",
+    "test": "remix build && node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit"
