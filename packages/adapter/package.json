@@ -46,7 +46,7 @@
     "@poppinss/utils": "^6.7.0"
   },
   "devDependencies": {
-    "@adonisjs/core": "^6.1.5-33",
+    "@adonisjs/core": "^6.1.5-35",
     "@adonisjs/eslint-config": "^1.2.0",
     "@adonisjs/http-server": "^7.0.0-4",
     "@adonisjs/prettier-config": "^1.2.0",
