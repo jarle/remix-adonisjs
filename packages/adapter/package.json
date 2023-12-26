@@ -63,7 +63,7 @@
     "del-cli": "^5.1.0",
     "eslint": "^8.51.0",
     "node-mocks-http": "^1.14.0",
-    "np": "^8.0.4",
+    "np": "^9.2.0",
     "prettier": "^3.0.3",
     "supertest": "^6.3.3",
     "ts-node": "^10.9.1",
