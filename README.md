@@ -138,7 +138,9 @@ Contributions are _very_ welcome ❤️
 
 You can hack on the project by using the [reference application](./packages/reference-app/README.md) and its associated integrations tests.
 
-Some ideas for improvements:
+A good start is to check out issues marked with [help wanted](https://github.com/jarle/remix-adonisjs/labels/help%20wanted) and see if you can contribute either with code or your opinion/experience.
+
+Some other ideas for improvements:
 - Documentation
 - Ease of setup
 - Project structure
