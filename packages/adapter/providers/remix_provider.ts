@@ -34,7 +34,7 @@ export default class RemixProvider {
 
   async boot() {
     const build = await import(this.remixBundle)
-    const requrestHandler = createRequestHandler({
+    const requestHandler = createRequestHandler({
       build,
       getLoadContext: (context) => context,
     })
@@ -43,12 +43,12 @@ export default class RemixProvider {
       'remixHandler',
       function (this: HttpContext) {
         return () =>
-          requrestHandler({
+          requestHandler({
             http: this,
             container: app.container,
           })
       },
-      true
+      false
     )
   }
 }

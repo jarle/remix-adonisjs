@@ -80,8 +80,16 @@ export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Req
   }
 
   if (req.method() !== 'GET' && req.method() !== 'HEAD') {
-    init.body = createReadableStreamFromReadable(req.request)
-    init.duplex = 'half'
+    // In case body has already been consumed by bodyparser
+    const raw = req.raw()
+    if (raw) {
+      console.log('Raw request')
+      init.body = Buffer.from(raw, 'utf-8')
+    } else {
+      console.log('Stream request')
+      init.body = createReadableStreamFromReadable(req.request)
+      init.duplex = 'half'
+    }
   }
 
   return new Request(url.href, init)
@@ -95,7 +103,6 @@ export async function sendRemixResponse(res: AdonisResponse, webResponse: Respon
 
   if (webResponse.body) {
     res.stream(new ReadableWebToNodeStream(webResponse.body))
-    res.finish()
   } else {
     res.finish()
   }
