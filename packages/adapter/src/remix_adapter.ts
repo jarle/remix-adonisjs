@@ -17,6 +17,11 @@ export type HandlerContext = {
   container: Container<ContainerBindings>
 }
 
+export type LoaderContext = {
+  http: HttpContext
+  make: Container<ContainerBindings>['make']
+}
+
 export type GetLoadContextFunction = (context: HandlerContext) => AppLoadContext
 
 export type RequestHandler = (context: HandlerContext) => Promise<void>
@@ -41,7 +46,7 @@ export function createRequestHandler({
 
     const response = await handleRequest(request, loadContext)
 
-    await sendRemixResponse(context.http.response, response)
+    sendRemixResponse(context.http.response, response)
   }
 }
 
@@ -80,23 +85,28 @@ export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Req
   }
 
   if (req.method() !== 'GET' && req.method() !== 'HEAD') {
-    init.body = createReadableStreamFromReadable(req.request)
-    init.duplex = 'half'
+    // In case body has already been consumed by bodyparser
+    const raw = req.raw()
+    if (raw) {
+      init.body = Buffer.from(raw, 'utf-8')
+    } else {
+      init.body = createReadableStreamFromReadable(req.request)
+      init.duplex = 'half'
+    }
   }
 
   return new Request(url.href, init)
 }
 
-export async function sendRemixResponse(
-  res: AdonisResponse,
-  nodeResponse: Response
-): Promise<void> {
-  res.response.statusMessage = nodeResponse.statusText
-  res.status(nodeResponse.status)
+export async function sendRemixResponse(res: AdonisResponse, webResponse: Response) {
+  res.response.statusMessage = webResponse.statusText
+  res.status(webResponse.status)
 
-  nodeResponse.headers.forEach((value, key) => res.append(key, value))
+  webResponse.headers.forEach((value, key) => res.append(key, value))
 
-  if (nodeResponse.body) {
-    res.stream(new ReadableWebToNodeStream(nodeResponse.body))
+  if (webResponse.body) {
+    res.stream(new ReadableWebToNodeStream(webResponse.body))
+  } else {
+    res.finish()
   }
 }

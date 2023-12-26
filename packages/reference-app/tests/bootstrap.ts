@@ -1,5 +1,7 @@
 import app from '@adonisjs/core/services/app'
+import server from '@adonisjs/core/services/server'
 import testUtils from '@adonisjs/core/services/test_utils'
+import { apiClient } from '@japa/api-client'
 import { assert } from '@japa/assert'
 import { browserClient } from '@japa/browser-client'
 import { pluginAdonisJS } from '@japa/plugin-adonisjs'
@@ -16,6 +18,7 @@ import type { Config } from '@japa/runner/types'
 export const plugins: Config['plugins'] = [
   assert(),
   pluginAdonisJS(app),
+  apiClient(),
   browserClient({
     runInSuites: ['browser'],
   }),
@@ -39,6 +42,11 @@ export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
  */
 export const configureSuite: Config['configureSuite'] = (suite) => {
   if (['browser', 'functional', 'e2e'].includes(suite.name)) {
-    return suite.setup(() => testUtils.httpServer().start())
+    return suite.setup(() => {
+      const testServer = testUtils.httpServer()
+      server.use([() => import('@adonisjs/static/static_middleware')])
+
+      return testServer.start()
+    })
   }
 }

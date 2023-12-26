@@ -49,6 +49,7 @@ test.group('createRemixRequest Adapter Tests', () => {
 
   test('handles cloned readable stream without memory leaks', async ({ assert }) => {
     const { url } = await httpServer.create((req, res) => {
+      req.method = 'POST'
       const remixRequest = createRemixRequest(mergeReqNode(req), mergeResNode(res))
 
       const reader = remixRequest.body!.getReader()

@@ -20,6 +20,10 @@ export class ReadableWebToNodeStream extends Readable {
   }
 
   async _read() {
+    if (this.released || this.readableEnded || this.pendingRead) {
+      return
+    }
+
     if (this.released || this.readableEnded) {
       this.push(null)
       return
