@@ -55,7 +55,7 @@
     "@adonisjs/static": "^1.0.3",
     "@adonisjs/vite": "^2.0.1",
     "@japa/browser-client": "^2.0.2",
-    "@matstack/remix-adonisjs": "file:../adapter",
+    "@matstack/remix-adonisjs": "*",
     "@remix-run/css-bundle": "^2.4.1",
     "@remix-run/node": "^2.4.1",
     "@remix-run/react": "^2.4.1",
