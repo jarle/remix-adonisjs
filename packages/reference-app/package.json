@@ -54,6 +54,7 @@
     "@adonisjs/shield": "^8.0.0-9",
     "@adonisjs/static": "^1.0.3",
     "@adonisjs/vite": "^2.0.1",
+    "@japa/api-client": "^2.0.2",
     "@japa/browser-client": "^2.0.2",
     "@matstack/remix-adonisjs": "^0.0.16",
     "@remix-run/css-bundle": "^2.4.1",
