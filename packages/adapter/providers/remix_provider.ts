@@ -36,7 +36,10 @@ export default class RemixProvider {
     const build = await import(this.remixBundle)
     const requestHandler = createRequestHandler({
       build,
-      getLoadContext: (context) => context,
+      getLoadContext: (context) => ({
+        http: context.http,
+        make: context.container.make.bind(context.container),
+      }),
     })
     const app = this.app
     HttpContext.getter(

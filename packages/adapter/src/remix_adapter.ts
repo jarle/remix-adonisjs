@@ -17,6 +17,11 @@ export type HandlerContext = {
   container: Container<ContainerBindings>
 }
 
+export type LoaderContext = {
+  http: HttpContext
+  make: Container<ContainerBindings>['make']
+}
+
 export type GetLoadContextFunction = (context: HandlerContext) => AppLoadContext
 
 export type RequestHandler = (context: HandlerContext) => Promise<void>
