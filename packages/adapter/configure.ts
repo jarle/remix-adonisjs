@@ -1,4 +1,7 @@
 import type Configure from '@adonisjs/core/commands/configure'
+import { joinToURL } from '@poppinss/utils'
+
+const STUBS_ROOT = joinToURL(import.meta.url, './stubs')
 
 export async function configure(command: Configure) {
   const codemods = await command.createCodemods()
@@ -28,11 +31,12 @@ export async function configure(command: Configure) {
     }))
   )
 
-  await command.publishStub('_index.tsx.stub')
-  await command.publishStub('root.tsx.stub')
-  await command.publishStub('remix.config.js.stub')
-  await command.publishStub('remix.env.d.ts.stub')
+  await codemods.makeUsingStub(STUBS_ROOT, '_index.tsx.stub', {})
+  await codemods.makeUsingStub(STUBS_ROOT, 'root.tsx.stub', {})
+  await codemods.makeUsingStub(STUBS_ROOT, 'remix.config.js.stub', {})
+  await codemods.makeUsingStub(STUBS_ROOT, 'remix.env.d.ts.stub', {})
 
+  // @ts-expect-error
   await codemods.updateRcFile((rcFile) => {
     rcFile.addProvider('@matstack/remix-adonisjs/remix_provider')
   })

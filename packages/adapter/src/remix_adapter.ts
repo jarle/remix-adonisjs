@@ -83,10 +83,8 @@ export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Req
     // In case body has already been consumed by bodyparser
     const raw = req.raw()
     if (raw) {
-      console.log('Raw request')
       init.body = Buffer.from(raw, 'utf-8')
     } else {
-      console.log('Stream request')
       init.body = createReadableStreamFromReadable(req.request)
       init.duplex = 'half'
     }
