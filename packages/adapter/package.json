@@ -43,10 +43,10 @@
     "version": "npm run build"
   },
   "dependencies": {
-    "@poppinss/utils": "^6.7.0"
+    "@poppinss/utils": "^6.7.1"
   },
   "devDependencies": {
-    "@adonisjs/core": "^6.1.5-33",
+    "@adonisjs/core": "^6.2.0",
     "@adonisjs/eslint-config": "^1.2.0",
     "@adonisjs/http-server": "^7.0.0-4",
     "@adonisjs/prettier-config": "^1.2.0",
@@ -54,20 +54,20 @@
     "@japa/assert": "^2.1.0",
     "@japa/expect": "^3.0.1",
     "@japa/runner": "^3.1.1",
-    "@swc/core": "^1.3.96",
+    "@swc/core": "^1.3.105",
     "@types/cloneable-readable": "^2.0.3",
-    "@types/node": "^20.10.5",
-    "@types/supertest": "^6.0.1",
+    "@types/node": "^20.11.5",
+    "@types/supertest": "^6.0.2",
     "c8": "^8.0.1",
     "copyfiles": "^2.4.1",
     "del-cli": "^5.1.0",
     "eslint": "^8.51.0",
-    "node-mocks-http": "^1.14.0",
+    "node-mocks-http": "^1.14.1",
     "np": "^8.0.4",
-    "prettier": "^3.0.3",
-    "supertest": "^6.3.3",
+    "prettier": "^3.2.4",
+    "supertest": "^6.3.4",
     "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.3"
   },
   "peerDependencies": {
     "@adonisjs/core": "^6.1.5-29",
