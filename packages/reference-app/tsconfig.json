@@ -5,7 +5,7 @@
     "outDir": "./build/adonis",
     "moduleResolution": "bundler",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ES2022",
+    "module": "ESNext",
     "jsx": "react-jsx",
     "paths": {
       "#controllers/*": ["./app/controllers/*.js"],

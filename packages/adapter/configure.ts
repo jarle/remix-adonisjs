@@ -11,7 +11,6 @@ export async function configure(command: Configure) {
     '@remix-run/node',
     '@remix-run/react',
     '@remix-run/serve',
-    'isbot',
     'react',
     'react-dom',
   ]
@@ -36,7 +35,6 @@ export async function configure(command: Configure) {
   await codemods.makeUsingStub(STUBS_ROOT, 'remix.config.js.stub', {})
   await codemods.makeUsingStub(STUBS_ROOT, 'remix.env.d.ts.stub', {})
 
-  // @ts-expect-error
   await codemods.updateRcFile((rcFile) => {
     rcFile.addProvider('@matstack/remix-adonisjs/remix_provider')
   })
