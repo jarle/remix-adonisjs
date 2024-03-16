@@ -70,7 +70,7 @@
     "typescript": "^5.4.2"
   },
   "peerDependencies": {
-    "@adonisjs/core": "^6.1.5-29",
+    "@adonisjs/core": "^6.3.1",
     "@remix-run/css-bundle": "^2.2.0",
     "@remix-run/dev": "^2.2.0",
     "@remix-run/node": "^2.2.0",
