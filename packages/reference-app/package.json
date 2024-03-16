@@ -6,9 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node bin/server.js",
-    "build": "remix build && node ace build",
-    "dev": "PORT=3000 remix dev --manual -c \"node ace serve --watch\"",
-    "test": "remix build && node ace test",
+    "build": "remix vite:build && node ace build",
+    "dev": "node ace serve --watch",
+    "test": "remix vite:build && node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit"

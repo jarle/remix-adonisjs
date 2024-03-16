@@ -6,7 +6,7 @@ export const loader = async () => {
   return defer({
     lazyPosts: new Promise<string[]>((resolve) => {
       setTimeout(() => {
-        resolve(['Post 1', 'Post 2'])
+        resolve(['Post 1', 'Post 2', 'Post 3'])
       }, 100)
     }),
   })
