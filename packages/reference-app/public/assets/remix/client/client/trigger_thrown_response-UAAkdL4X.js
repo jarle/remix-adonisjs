@@ -1,1 +1,0 @@
-import{j as r}from"./jsx-runtime-eUkJMm6l.js";import{E as o}from"./error_boundary-T-ppZwYN.js";import"./index-FZYdsAyj.js";const m=()=>r.jsx(o,{});function p(){return null}export{m as ErrorBoundary,p as default};

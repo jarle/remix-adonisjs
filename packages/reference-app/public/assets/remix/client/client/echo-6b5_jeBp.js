@@ -1,1 +1,0 @@
-import{j as e}from"./jsx-runtime-eUkJMm6l.js";import{u as r}from"./components-8brcXnEx.js";import"./index-FZYdsAyj.js";function i(){const{message:s}=r();return e.jsxs(e.Fragment,{children:[e.jsx("h1",{children:"Echo"}),e.jsx("p",{id:"message",children:s})]})}export{i as default};

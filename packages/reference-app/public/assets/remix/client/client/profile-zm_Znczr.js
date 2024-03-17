@@ -1,1 +1,0 @@
-import{j as e}from"./jsx-runtime-eUkJMm6l.js";import{u as s}from"./components-8brcXnEx.js";import"./index-FZYdsAyj.js";function m(){const{userName:r,email:i}=s();return e.jsxs("div",{children:[e.jsx("h1",{children:"Profile"}),e.jsx("p",{id:"name",children:r}),e.jsx("p",{id:"email",children:i})]})}export{m as default};
