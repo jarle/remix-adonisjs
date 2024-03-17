@@ -35,6 +35,7 @@ export default defineConfig({
     () => import('@adonisjs/lucid/database_provider'),
     () => import('@adonisjs/auth/auth_provider'),
     () => import('@adonisjs/static/static_provider'),
+    () => import('@adonisjs/vite/vite_provider'),
     () => import('@matstack/remix-adonisjs/remix_provider'),
   ],
 
@@ -80,7 +81,7 @@ export default defineConfig({
   metaFiles: [
     {
       pattern: 'public/**',
-      reloadServer: true,
+      reloadServer: false,
     },
   ],
 })

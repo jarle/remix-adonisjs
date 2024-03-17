@@ -1,0 +1,1 @@
+import{j as t}from"./jsx-runtime-eUkJMm6l.js";import{u as o}from"./components-8brcXnEx.js";import"./index-FZYdsAyj.js";function n(){const{env:r}=o();return t.jsx("p",{children:r})}export{n as default};

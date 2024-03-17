@@ -1,3 +1,4 @@
+import adonisjs from '@adonisjs/vite/client'
 import { vitePlugin as remix } from '@remix-run/dev'
 import { defineConfig } from 'vite'
 
@@ -9,8 +10,11 @@ export default defineConfig({
     remix({
       appDirectory: 'resources/remix_app',
       ignoredRouteFiles: ['**/.*'],
-      buildDirectory: 'build/remix',
+      buildDirectory: 'public/assets/remix/client',
       serverBuildFile: 'server.js',
+    }),
+    adonisjs({
+      entrypoints: [],
     }),
   ],
 })
