@@ -56,18 +56,18 @@
     "@japa/runner": "^3.1.1",
     "@swc/core": "^1.4.8",
     "@types/cloneable-readable": "^2.0.3",
-    "@types/node": "^20.11.28",
+    "@types/node": "^20.11.30",
     "@types/supertest": "^6.0.2",
     "c8": "^9.1.0",
     "copyfiles": "^2.4.1",
     "del-cli": "^5.1.0",
     "eslint": "^8.57.0",
     "node-mocks-http": "^1.14.1",
-    "np": "^10.0.1",
+    "np": "^10.0.2",
     "prettier": "^3.2.5",
     "supertest": "^6.3.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.3"
   },
   "peerDependencies": {
     "@adonisjs/core": "^6.3.1",
