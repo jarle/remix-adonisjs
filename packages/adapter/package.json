@@ -84,6 +84,14 @@
   "eslintConfig": {
     "extends": "@adonisjs/eslint-config/package"
   },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/jarle/remix-adonisjs"
+    },
+    "bugs": {
+      "url": "https://github.com/jarle/remix-adonisjs/issues"
+    },
+    "homepage": "https://github.com/jarle/remix-adonisjs#readme",
   "prettier": "@adonisjs/prettier-config",
   "publishConfig": {
     "access": "public",
