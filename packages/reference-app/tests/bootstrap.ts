@@ -44,7 +44,10 @@ export const configureSuite: Config['configureSuite'] = (suite) => {
   if (['browser', 'functional', 'e2e'].includes(suite.name)) {
     return suite.setup(() => {
       const testServer = testUtils.httpServer()
-      server.use([() => import('@adonisjs/static/static_middleware')])
+      server.use([
+        () => import('@adonisjs/static/static_middleware'),
+        () => import('@adonisjs/vite/vite_middleware'),
+      ])
 
       return testServer.start()
     })
