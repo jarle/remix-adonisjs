@@ -1,7 +1,13 @@
+import type { AssemblerHookHandler } from '@adonisjs/core/types/app'
 import { spawn } from 'node:child_process'
 import fs from 'node:fs'
 
-export default async function myHook() {
+/**
+ *
+ * The hook is responsible for launching the remix vite:build command when the application is built
+ */
+export default async function remixBuildHook({ logger }: Parameters<AssemblerHookHandler>[0]) {
+  logger.info('building remix app with vite')
   await runCommand('remix vite:build')
   // const cli = await import('@remix-run/dev')
   // await cli.run(['vite:build'])

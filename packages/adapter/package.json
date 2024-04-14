@@ -1,7 +1,7 @@
 {
   "name": "@matstack/remix-adonisjs",
   "description": "An adapter for using Remix with AdonisJS",
-  "version": "0.0.18",
+  "version": "0.0.21",
   "engines": {
     "node": ">=20.10.0"
   },
@@ -87,14 +87,14 @@
   "eslintConfig": {
     "extends": "@adonisjs/eslint-config/package"
   },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/jarle/remix-adonisjs"
-    },
-    "bugs": {
-      "url": "https://github.com/jarle/remix-adonisjs/issues"
-    },
-    "homepage": "https://github.com/jarle/remix-adonisjs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jarle/remix-adonisjs"
+  },
+  "bugs": {
+    "url": "https://github.com/jarle/remix-adonisjs/issues"
+  },
+  "homepage": "https://github.com/jarle/remix-adonisjs#readme",
   "prettier": "@adonisjs/prettier-config",
   "publishConfig": {
     "access": "public",
