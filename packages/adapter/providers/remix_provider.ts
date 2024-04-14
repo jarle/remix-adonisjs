@@ -3,6 +3,7 @@ import { RequestHandler, createRequestHandler } from '../src/remix_adapter.js'
 
 import { HttpContext } from '@adonisjs/core/http'
 import { ApplicationService } from '@adonisjs/core/types'
+import { pathToFileURL } from 'node:url'
 import '../src/types/main.js'
 
 declare module '@adonisjs/core/types' {
@@ -19,7 +20,9 @@ declare module '@adonisjs/core/http' {
 
 export default class RemixProvider {
   static needsApplication = true
-  private remixBundle = path.join(process.cwd(), 'build/remix/server/server.js')
+  private remixBundle = pathToFileURL(
+    path.join(process.cwd(), 'build/remix/server/server.js')
+  ).toString()
 
   constructor(protected app: ApplicationService) {}
 
