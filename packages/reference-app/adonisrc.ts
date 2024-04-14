@@ -84,4 +84,8 @@ export default defineConfig({
       reloadServer: false,
     },
   ],
+  assetsBundler: false,
+  unstable_assembler: {
+    onBuildStarting: [() => import('./myhook.js')],
+  },
 })

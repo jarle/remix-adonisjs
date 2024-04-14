@@ -24,6 +24,7 @@
   "exports": {
     ".": "./build/index.js",
     "./remix_provider": "./build/providers/remix_provider.js",
+    "./build_hook": "./build/src/hooks/build_hook.js",
     "./types": "./build/src/types/main.js"
   },
   "scripts": {

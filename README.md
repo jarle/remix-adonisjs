@@ -58,7 +58,7 @@ node ace configure @matstack/remix-adonisjs
 Update your `tsconfig.json` compiler options to include these lines:
 ``` json
   "compilerOptions": {
-    "outDir": "./build/adonis",
+    "outDir": "./build/",
     "module": "ES2022",
     "moduleResolution": "bundler",
     "lib": ["ES2019", "DOM", "DOM.Iterable"],

@@ -6,11 +6,11 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  base: '/assets/',
   plugins: [
     remix({
       appDirectory: 'resources/remix_app',
-      ignoredRouteFiles: ['**/.*'],
-      buildDirectory: 'public/assets/remix/client',
+      buildDirectory: 'build/remix',
       serverBuildFile: 'server.js',
     }),
     adonisjs({
