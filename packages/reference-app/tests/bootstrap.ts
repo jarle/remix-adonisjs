@@ -20,6 +20,9 @@ export const plugins: Config['plugins'] = [
   pluginAdonisJS(app),
   apiClient(),
   browserClient({
+    contextOptions: {
+      baseURL: 'http://localhost:3333'
+    },
     runInSuites: ['browser'],
   }),
 ]
