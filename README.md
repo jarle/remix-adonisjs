@@ -30,12 +30,11 @@ Just jump into your new folder and start the dev server with `npm run dev`.
 
 ### Moving an existing Remix application
 
-> **HELP WANTED**: Simplify the migration process for Remix project with better project interop.
-
 Moving an existing Remix application currently takes some manual work.
 This is very dependent on how your existing application is set up, and might be a major migration if you have a big Remix project.
 For that reason, only high-level instructions are provided here.
 
+- [Migrate your remix project to Vite](https://remix.run/docs/en/main/future/vite#migrating) if you haven't already
 - Set up a fresh project using the instructions in [the quickstart section](#quickstart)
 - Replace the contents of the `resources/remix_app/` folder with the contents of your Remix `app` folder
 - Port over your `package.json`
@@ -47,13 +46,20 @@ Please let me know about any issues you encounter when migrating so they can be 
 
 Requirements:
 - AdonisJS 6
-- [@adonisjs/static](https://github.com/adonisjs/static) middleware
+- [@adonisjs/vite](https://github.com/adonisjs/vite) plugin
+
+Install and configure `@adonisjs/vite` using the [official documentation](https://docs.adonisjs.com/guides/experimental-vite#installation)
 
 Install remix-adonisjs:
 ``` bash
 npm install @matstack/remix-adonisjs
 node ace configure @matstack/remix-adonisjs
 ```
+
+
+> [!IMPORTANT]  
+> Make sure that the `vite_provider` is placed above the `remix_provider` in `adonisrc.ts`
+
 
 Update your `tsconfig.json` compiler options to include these lines:
 ``` json
@@ -73,6 +79,8 @@ router.any('*', async ({ remixHandler }) => {
   return remixHandler()
 })
 
+You should now have a working remix-adonisjs application!
+
 ```
 
 ## Documentation
@@ -88,8 +96,8 @@ Please refer to the documentation for the two frameworks for now:
 This is a batteries-included meta-framework for building typesafe full-stack applications with Remix on node.js.
 
 #### How does it work?
-It works by integrating your Remix application into your AdonisJS web server, providing a simple API to interact with in your server-side Remix actions and loaders.
-This gives you full runtime access to the powerful AdonisJS IoC container and HTTP context, unlocking all the features of the AdonisJS framework.
+It works by embedding your Remix application into your AdonisJS web server, supercharging your Remix loaders and actions.
+This gives you full runtime access to the powerful AdonisJS IoC container and HTTP context, unlocking all the features of the AdonisJS framework with deeply integrated authentication- and authorization controls.
 
 Here is a simple loader accessing the authenticated user and sending them an email from a remix loader using [@adonisjs/mail](https://github.com/adonisjs/mail/):
 ``` typescript
@@ -114,7 +122,7 @@ export const loader = async ({ context }: LoaderFunctionArgs) => {
 
 ```
 
-#### Why?
+#### Why does it exist?
 Remix is incredibly powerful for building React applications, but is not opinionated about how to build the backend for your application.
 This means you have to pull in several external dependencies that may or may not work well togheter. 
 
