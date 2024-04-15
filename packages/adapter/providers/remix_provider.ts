@@ -1,3 +1,5 @@
+/// <reference types="@adonisjs/vite/vite_provider" />
+
 import path from 'node:path'
 import { RequestHandler, createRequestHandler } from '../src/remix_adapter.js'
 
@@ -28,7 +30,6 @@ export default class RemixProvider {
 
   async boot() {
     const vite = await this.app.container.make('vite')
-    // @ts-ignore
     const devServer = vite.getDevServer()
     const build = devServer
       ? () => devServer?.ssrLoadModule('virtual:remix/server-build')

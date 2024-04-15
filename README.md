@@ -67,15 +67,6 @@ Update your `tsconfig.json` compiler options to include these lines:
   }
 ```
 
-Update your `package.json` scripts to run the remix dev server:
-``` json
-  "scripts": {
-    "build": "remix build && node ace build",
-    "dev": "PORT=3000 remix dev --manual -c \"node ace serve --watch\"",
-    [...]
-  }
-```
-
 Add a route handler to `start/routes.ts` that invokes the Remix request handler for all HTTP verbs:
 ``` typescript
 router.any('*', async ({ remixHandler }) => {
