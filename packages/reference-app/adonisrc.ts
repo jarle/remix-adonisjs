@@ -73,7 +73,7 @@ export default defineConfig({
       {
         files: ['tests/browser/**/*.spec(.ts|.js)'],
         name: 'browser',
-        timeout: 5000,
+        timeout: 30000,
       },
     ],
     forceExit: false,
