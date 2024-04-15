@@ -1,6 +1,7 @@
 import type { AssemblerHookHandler } from '@adonisjs/core/types/app'
 import { spawn } from 'node:child_process'
 import fs from 'node:fs'
+import path from 'node:path'
 
 /**
  *
@@ -12,7 +13,16 @@ export default async function remixBuildHook({ logger }: Parameters<AssemblerHoo
   // const cli = await import('@remix-run/dev')
   // await cli.run(['vite:build'])
   fs.mkdirSync('build/public/assets', { recursive: true })
-  fs.renameSync('build/remix/client', 'build/public/assets')
+  const source = 'build/remix/client'
+  const target = 'build/public/assets'
+  const entries = fs.readdirSync('build/remix/client', { withFileTypes: true })
+
+  for (let entry of entries) {
+    const sourcePath = path.join(source, entry.name)
+    const targetPath = path.join(target, entry.name)
+
+    fs.copyFileSync(sourcePath, targetPath)
+  }
 }
 
 async function runCommand(command: string, args = []) {
