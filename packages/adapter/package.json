@@ -43,34 +43,34 @@
     "version": "npm run build"
   },
   "dependencies": {
-    "@poppinss/utils": "^6.7.2"
+    "@poppinss/utils": "^6.7.3"
   },
   "devDependencies": {
-    "@adonisjs/core": "^6.3.1",
+    "@adonisjs/core": "^6.6.0",
     "@adonisjs/eslint-config": "^1.3.0",
     "@adonisjs/http-server": "^7.1.0",
     "@adonisjs/prettier-config": "^1.3.0",
     "@adonisjs/tsconfig": "^1.3.0",
     "@japa/assert": "^2.1.0",
-    "@japa/expect": "^3.0.1",
-    "@japa/runner": "^3.1.1",
-    "@swc/core": "^1.4.8",
+    "@japa/expect": "^3.0.2",
+    "@japa/runner": "^3.1.2",
+    "@swc/core": "^1.4.14",
     "@types/cloneable-readable": "^2.0.3",
-    "@types/node": "^20.11.28",
+    "@types/node": "^20.12.7",
     "@types/supertest": "^6.0.2",
     "c8": "^9.1.0",
     "copyfiles": "^2.4.1",
     "del-cli": "^5.1.0",
     "eslint": "^8.57.0",
     "node-mocks-http": "^1.14.1",
-    "np": "^10.0.1",
+    "np": "^10.0.3",
     "prettier": "^3.2.5",
     "supertest": "^6.3.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.5"
   },
   "peerDependencies": {
-    "@adonisjs/core": "^6.3.1",
+    "@adonisjs/core": "^6.6.0",
     "@remix-run/css-bundle": "^2.2.0",
     "@remix-run/dev": "^2.2.0",
     "@remix-run/node": "^2.2.0",
