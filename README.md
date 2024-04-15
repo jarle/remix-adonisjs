@@ -79,9 +79,9 @@ router.any('*', async ({ remixHandler }) => {
   return remixHandler()
 })
 
-You should now have a working remix-adonisjs application!
-
 ```
+
+You should now have a working remix-adonisjs application!
 
 ## Documentation
 
