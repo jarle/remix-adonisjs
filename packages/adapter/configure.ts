@@ -32,8 +32,8 @@ export async function configure(command: Configure) {
 
   await codemods.makeUsingStub(STUBS_ROOT, '_index.tsx.stub', {})
   await codemods.makeUsingStub(STUBS_ROOT, 'root.tsx.stub', {})
-  await codemods.makeUsingStub(STUBS_ROOT, 'remix.config.js.stub', {})
-  await codemods.makeUsingStub(STUBS_ROOT, 'remix.env.d.ts.stub', {})
+  await codemods.makeUsingStub(STUBS_ROOT, 'vite.config.ts.stub', {})
+  await codemods.makeUsingStub(STUBS_ROOT, 'env.d.ts.stub', {})
 
   await codemods.updateRcFile((rcFile) => {
     rcFile.addProvider('@matstack/remix-adonisjs/remix_provider')

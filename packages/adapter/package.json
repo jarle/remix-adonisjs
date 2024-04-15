@@ -1,7 +1,7 @@
 {
   "name": "@matstack/remix-adonisjs",
   "description": "An adapter for using Remix with AdonisJS",
-  "version": "0.0.18",
+  "version": "0.0.22",
   "engines": {
     "node": ">=20.10.0"
   },
@@ -24,6 +24,7 @@
   "exports": {
     ".": "./build/index.js",
     "./remix_provider": "./build/providers/remix_provider.js",
+    "./build_hook": "./build/src/hooks/build_hook.js",
     "./types": "./build/src/types/main.js"
   },
   "scripts": {
@@ -51,6 +52,7 @@
     "@adonisjs/http-server": "^7.1.0",
     "@adonisjs/prettier-config": "^1.3.0",
     "@adonisjs/tsconfig": "^1.3.0",
+    "@adonisjs/vite": "^3.0.0-8",
     "@japa/assert": "^2.1.0",
     "@japa/expect": "^3.0.1",
     "@japa/runner": "^3.1.1",
@@ -67,7 +69,8 @@
     "prettier": "^3.2.5",
     "supertest": "^6.3.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.2",
+    "vite": "^5.1.6"
   },
   "peerDependencies": {
     "@adonisjs/core": "^6.3.1",
@@ -84,14 +87,14 @@
   "eslintConfig": {
     "extends": "@adonisjs/eslint-config/package"
   },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/jarle/remix-adonisjs"
-    },
-    "bugs": {
-      "url": "https://github.com/jarle/remix-adonisjs/issues"
-    },
-    "homepage": "https://github.com/jarle/remix-adonisjs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jarle/remix-adonisjs"
+  },
+  "bugs": {
+    "url": "https://github.com/jarle/remix-adonisjs/issues"
+  },
+  "homepage": "https://github.com/jarle/remix-adonisjs#readme",
   "prettier": "@adonisjs/prettier-config",
   "publishConfig": {
     "access": "public",

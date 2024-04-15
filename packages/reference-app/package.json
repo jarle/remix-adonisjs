@@ -6,9 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node bin/server.js",
-    "build": "remix build && node ace build",
-    "dev": "PORT=3000 remix dev --manual -c \"node ace serve --watch\"",
-    "test": "remix build && node ace test",
+    "build": "node ace build",
+    "dev": "node ace serve --watch",
+    "test": "node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit"
@@ -53,7 +53,7 @@
     "@adonisjs/session": "^7.1.1",
     "@adonisjs/shield": "^8.1.1",
     "@adonisjs/static": "^1.1.1",
-    "@adonisjs/vite": "^2.0.2",
+    "@adonisjs/vite": "^3.0.0-11",
     "@japa/api-client": "^2.0.2",
     "@japa/browser-client": "^2.0.2",
     "@matstack/remix-adonisjs": "*",
