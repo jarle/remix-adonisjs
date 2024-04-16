@@ -23,7 +23,7 @@ Just jump into your new folder and start the dev server with `npm run dev`.
 
 ## Documentation
 
-Guides for remix-adonisjs can be found in the [official documentation](https://matstack.dev/remix-adonisjs)
+Guides for remix-adonisjs can be found in the [official documentation](https://remix-adonisjs.matstack.dev/)
 
 For implementation details/reference, refer to the official documentation for the two frameworks:
 - [Remix documentation](https://remix.run/docs/)

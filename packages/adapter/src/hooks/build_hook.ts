@@ -15,13 +15,24 @@ export default async function remixBuildHook({ logger }: Parameters<AssemblerHoo
   fs.mkdirSync('build/public/assets', { recursive: true })
   const source = 'build/remix/client'
   const target = 'build/public/assets'
-  const entries = fs.readdirSync('build/remix/client', { withFileTypes: true })
+
+  copyDirectorySync(source, target)
+}
+
+function copyDirectorySync(source: string, target: string) {
+  fs.mkdirSync(target, { recursive: true })
+
+  const entries = fs.readdirSync(source, { withFileTypes: true })
 
   for (let entry of entries) {
     const sourcePath = path.join(source, entry.name)
     const targetPath = path.join(target, entry.name)
 
-    fs.copyFileSync(sourcePath, targetPath)
+    if (entry.isDirectory()) {
+      copyDirectorySync(sourcePath, targetPath)
+    } else {
+      fs.copyFileSync(sourcePath, targetPath)
+    }
   }
 }
 
