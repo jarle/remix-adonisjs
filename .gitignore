@@ -26,3 +26,6 @@ yarn-error.log
 
 screenshots/
 public/assets/
+
+*/.vitepress/dist
+*/.vitepress/cache
