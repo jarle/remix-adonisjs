@@ -7,7 +7,7 @@
 - Mailer
 - Dependency injection
 
-...and much, much more from the AdonisJS 6 ecosystem. Read [the about section](#about) if you want to learn more.
+...and much, much more from the AdonisJS 6 ecosystem. Read [the about section](https://remix-adonisjs.matstack.dev/about.html) if you want to learn more.
 
 ## Quickstart
 
