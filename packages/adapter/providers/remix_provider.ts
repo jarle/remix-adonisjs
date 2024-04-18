@@ -29,6 +29,10 @@ export default class RemixProvider {
   constructor(protected app: ApplicationService) {}
 
   async boot() {
+    const env = this.app.getEnvironment()
+    if (env !== 'web' && env !== 'test') {
+      return
+    }
     const vite = await this.app.container.make('vite')
     const devServer = vite.getDevServer()
     const build = devServer
