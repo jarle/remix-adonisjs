@@ -5,6 +5,7 @@ export const action = async ({ context }: ActionFunctionArgs) => {
   const { http } = context
 
   http.session.put('login', 'true')
+  http.session.flash('status', 'success')
 
   return redirect('/dashboard')
 }
