@@ -17,4 +17,9 @@ export default defineConfig({
       entrypoints: [],
     }),
   ],
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'ES2022',
+    },
+  },
 })
