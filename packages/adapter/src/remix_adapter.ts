@@ -111,7 +111,5 @@ export async function sendRemixResponse(ctx: HttpContext, webResponse: Response)
 
   if (webResponse.body) {
     res.stream(new ReadableWebToNodeStream(webResponse.body))
-  } else {
-    res.finish()
   }
 }
