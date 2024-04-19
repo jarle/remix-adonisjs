@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node bin/server.js",
     "build": "node ace build",
-    "dev": "node ace serve --watch",
+    "dev": "node ace serve --unstable-hmr",
     "test": "node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -40,6 +40,7 @@
     "@types/react": "^18.2.78",
     "@types/react-dom": "^18.2.25",
     "eslint": "^8.57.0",
+    "hot-hook": "^0.2.0",
     "pino-pretty": "^10.3.1",
     "prettier": "^3.2.5",
     "ts-node": "^10.9.2",
@@ -73,5 +74,16 @@
   "eslintConfig": {
     "extends": "@adonisjs/eslint-config/app"
   },
-  "prettier": "@adonisjs/prettier-config"
+  "prettier": "@adonisjs/prettier-config",
+  "hotHook": {
+    "boundaries": [
+      "./app/controllers/**/*.ts",
+      "./app/middlewares/*.ts"
+    ],
+    "ignore": [
+      "node_modules/**",
+      "resources/remix_app/**",
+      "vite.config.ts.timestamp*"
+    ]
+  }
 }
