@@ -39,7 +39,7 @@
     "prepublishOnly": "npm run build",
     "quick:test": "node --enable-source-maps --loader=ts-node/esm bin/test.ts",
     "release": "npm version patch --force && npm publish",
-    "test": "NODE_DEBUG=adonisjs:*,matstack:* NODE_ENV=test node --loader ts-node/esm --enable-source-maps bin/test.ts",
+    "test": "cross-env NODE_DEBUG=adonisjs:*,matstack:* NODE_ENV=test node --loader ts-node/esm --enable-source-maps bin/test.ts",
     "typecheck": "tsc --noEmit",
     "version": "npm run build"
   },
@@ -64,6 +64,7 @@
     "@types/supertest": "^6.0.2",
     "c8": "^9.1.0",
     "copyfiles": "^2.4.1",
+    "cross-env": "^7.0.3",
     "del-cli": "^5.1.0",
     "eslint": "^8.57.0",
     "node-mocks-http": "^1.14.1",
