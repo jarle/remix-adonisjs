@@ -4,6 +4,14 @@ import { Form } from '@remix-run/react'
 export const action = async ({ context }: ActionFunctionArgs) => {
   const { http } = context
 
+  const { password } = http.request.only(['password'])
+  if (password !== '123') {
+    http.session.flash('message', 'Wrong password')
+    return new Response(null, {
+      status: 401,
+    })
+  }
+
   http.session.put('login', 'true')
   http.session.flash('status', 'success')
 
