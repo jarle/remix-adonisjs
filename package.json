@@ -6,6 +6,7 @@
   ],
   "scripts": {
     "build": "npm --workspace packages/adapter run build && npm --workspace packages/reference-app run build",
-    "test": "npm --workspace packages/adapter run test && npm --workspace packages/reference-app run test"
+    "test": "npm --workspace packages/adapter run test && npm --workspace packages/reference-app run test",
+    "release": "npm --workspace packages/adapter run release"
   }
 }
