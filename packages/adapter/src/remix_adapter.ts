@@ -10,6 +10,7 @@ import {
   createReadableStreamFromReadable,
   createRequestHandler as createRemixRequestHandler,
 } from '@remix-run/node'
+import debug from './debug.js'
 import { ReadableWebToNodeStream } from './stream_conversion.js'
 
 export type HandlerContext = {
@@ -41,12 +42,13 @@ export function createRequestHandler({
   let handleRequest = createRemixRequestHandler(build, mode)
 
   return async (context: HandlerContext) => {
+    debug(`Creating remix request for ${context.http.request.parsedUrl}`)
     const request = createRemixRequest(context.http.request, context.http.response)
     const loadContext = getLoadContext(context)
 
     const response = await handleRequest(request, loadContext)
 
-    sendRemixResponse(context.http.response, response)
+    sendRemixResponse(context.http, response)
   }
 }
 
@@ -98,10 +100,13 @@ export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Req
   return new Request(url.href, init)
 }
 
-export async function sendRemixResponse(res: AdonisResponse, webResponse: Response) {
+export async function sendRemixResponse(ctx: HttpContext, webResponse: Response) {
+  const res = ctx.response
   res.response.statusMessage = webResponse.statusText
   res.status(webResponse.status)
 
+  debug('Commit session early for remix response')
+  ctx.session?.commit()
   webResponse.headers.forEach((value, key) => res.append(key, value))
 
   if (webResponse.body) {
