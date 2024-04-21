@@ -1,7 +1,7 @@
 {
   "name": "@matstack/remix-adonisjs",
   "description": "An adapter for using Remix with AdonisJS",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "engines": {
     "node": ">=20.10.0"
   },
