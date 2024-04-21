@@ -1,7 +1,7 @@
 {
   "name": "@matstack/remix-adonisjs",
   "description": "An adapter for using Remix with AdonisJS",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "engines": {
     "node": ">=20.10.0"
   },
@@ -11,6 +11,7 @@
     "src",
     "providers",
     "index.ts",
+    "build/commands",
     "build/src",
     "build/providers",
     "build/stubs",
@@ -23,6 +24,7 @@
   ],
   "exports": {
     ".": "./build/index.js",
+    "./commands": "./build/commands/main.js",
     "./remix_provider": "./build/providers/remix_provider.js",
     "./build_hook": "./build/src/hooks/build_hook.js",
     "./types": "./build/src/types/main.js"
@@ -34,14 +36,15 @@
     "copy:templates": "copyfiles \"stubs/**/**/*.stub\" build",
     "format": "prettier --write .",
     "lint": "eslint . --ext=.ts",
-    "postcompile": "npm run copy:templates",
+    "postcompile": "npm run copy:templates && npm run index:commands",
     "precompile": "npm run lint",
     "prepublishOnly": "npm run build",
     "quick:test": "node --enable-source-maps --loader=ts-node/esm bin/test.ts",
     "release": "npm version patch --force && npm publish",
     "test": "cross-env NODE_DEBUG=adonisjs:*,matstack:* NODE_ENV=test node --loader ts-node/esm --enable-source-maps bin/test.ts",
     "typecheck": "tsc --noEmit",
-    "version": "npm run build"
+    "version": "npm run build",
+    "index:commands": "adonis-kit index build/commands"
   },
   "dependencies": {
     "@poppinss/utils": "^6.7.3"
