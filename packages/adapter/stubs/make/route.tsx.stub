@@ -17,7 +17,7 @@ import { {{imports.react}} } from '@remix-run/react'
 export const loader = ({ context }: LoaderFunctionArgs) => {
   const { http, make } = context
   return json({
-    message: "Hello from " + http.request.completeUrl(),
+    message: 'Hello from ' + http.request.completeUrl(),
   })
 }
 {{{/if}}}

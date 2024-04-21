@@ -36,6 +36,7 @@ export async function configure(command: Configure) {
   await codemods.makeUsingStub(STUBS_ROOT, 'env.d.ts.stub', {})
 
   await codemods.updateRcFile((rcFile) => {
+    rcFile.addCommand('@matstack/remix-adonisjs/commands')
     rcFile.addProvider('@matstack/remix-adonisjs/remix_provider')
   })
 }
