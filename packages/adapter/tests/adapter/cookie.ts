@@ -2,7 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import type { CookieOptions } from '@adonisjs/core/types/http'
 
 import { SessionData, SessionStoreContract } from '@adonisjs/session/types'
-import debug from '../src/debug.js'
+import debug from '../../src/debug.js'
 
 /**
  * Cookie store stores the session data inside an encrypted

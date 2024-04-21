@@ -3,7 +3,7 @@ import { test } from '@japa/runner'
 import { RequestOptions, ResponseOptions, createRequest, createResponse } from 'node-mocks-http'
 import { IncomingMessage, ServerResponse } from 'node:http'
 import supertest from 'supertest'
-import { createRemixRequest } from '../src/remix_adapter.js'
+import { createRemixRequest } from '../../src/remix_adapter.js'
 import { httpServer } from './http_server.js'
 
 test.group('createRemixRequest Adapter Tests', () => {

@@ -1,0 +1,112 @@
+{{#var entity = generators.createEntity(name)}}
+{{#var routeFileName = string(entity.name).ext('.tsx').toString()}}
+
+{{{
+  exports({
+    to: app.makePath('resources/remix_app/routes', routeFileName)
+  })
+}}}
+{{#if imports.node}}
+import { {{imports.node}} } from '@remix-run/node'
+{{/if}}
+{{#if imports.react}}
+import { {{imports.react}} } from '@remix-run/react'
+{{/if}}
+{{{#if flags.loader}}}
+
+export const loader = ({ context }: LoaderFunctionArgs) => {
+  const { http, make } = context
+  return json({
+    message: "Hello from " + http.request.completeUrl(),
+  })
+}
+{{{/if}}}
+{{#if flags["client-loader"]}}
+
+// https://remix.run/docs/en/main/route/client-loader
+export const clientLoader = async ({ request, params, serverLoader }: ClientLoaderFunctionArgs) => {
+  // call the server loader
+  const serverData = await serverLoader();
+  // And/or fetch data on the client
+  const data = getDataFromClient();
+  // Return the data to expose through useLoaderData()
+  return data;
+}
+{{/if}}
+{{#if flags.action}}
+
+export const action = ({ context }: ActionFunctionArgs) => {
+  const { http, make } = context
+  return json({
+    message: 'Hello',
+  })
+}
+{{/if}}
+{{#if flags["client-action"]}}
+
+// https://remix.run/docs/en/main/route/client-action
+export const clientAction = async ({ request, params, serverAction }: ClientActionFunctionArgs) => {
+  // invalidateClientSideCache()
+  const data = await serverAction()
+  return data
+}
+{{/if}}
+{{#if flags.meta}}
+
+// https://remix.run/docs/en/main/route/meta
+export const meta: MetaFunction = () => {
+  return [{ title: '{{{name}}}' }, { name: 'description', content: 'Route {{{name}}}' }]
+}
+{{/if}}
+{{#if flags.headers}}
+
+// https://remix.run/docs/en/main/route/headers
+export const headers: HeadersFunction = ({
+  actionHeaders,
+  errorHeaders,
+  loaderHeaders,
+  parentHeaders,
+}) => ({
+  'X-Stretchy-Pants': 'its for fun',
+  'Cache-Control': 'max-age=300, s-maxage=3600',
+})
+{{/if}}
+
+export default function Page() {
+{{#if flags.loader}}
+  const data = useLoaderData<typeof loader>()
+{{/if}}
+{{#if flags.action}}
+  const actionData = useActionData<typeof action>()
+{{/if}}
+  return <div>New route</div>
+}
+{{#if flags['error-boundary']}}
+
+// https://remix.run/docs/en/main/route/error-boundary
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    return (
+      <div>
+        <h1>
+          {error.status} {error.statusText}
+        </h1>
+        <p>{error.data}</p>
+      </div>
+    );
+  } else if (error instanceof Error) {
+    return (
+      <div>
+        <h1>Error</h1>
+        <p>{error.message}</p>
+        <p>The stack trace is:</p>
+        <pre>{error.stack}</pre>
+      </div>
+    );
+  } else {
+    return <h1>Unknown Error</h1>;
+  }
+}
+{{/if}}

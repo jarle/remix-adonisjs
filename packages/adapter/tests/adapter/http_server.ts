@@ -11,8 +11,8 @@ import { getActiveTest } from '@japa/runner'
 import { RequestHandler } from '@remix-run/node'
 import getPort from 'get-port'
 import { IncomingMessage, Server, ServerResponse, createServer } from 'node:http'
-import debug from '../src/debug.js'
-import { createRemixRequest, sendRemixResponse } from '../src/remix_adapter.js'
+import debug from '../../src/debug.js'
+import { createRemixRequest, sendRemixResponse } from '../../src/remix_adapter.js'
 import { CookieStore } from './cookie.js'
 
 export const httpServer = {

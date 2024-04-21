@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
 import { ReadableStream } from 'node:stream/web'
-import { ReadableWebToNodeStream } from '../src/stream_conversion.js'
+import { ReadableWebToNodeStream } from '../../src/stream_conversion.js'
 
 const mockReadableStream = (
   data: string[] = [],

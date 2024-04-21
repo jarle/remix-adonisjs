@@ -2,7 +2,7 @@ import { RequestFactory, ResponseFactory } from '@adonisjs/core/factories/http'
 import { test } from '@japa/runner'
 import { RequestOptions, ResponseOptions, createRequest, createResponse } from 'node-mocks-http'
 import { ServerResponse } from 'node:http'
-import { createRemixHeaders, createRemixRequest } from '../src/remix_adapter.js'
+import { createRemixHeaders, createRemixRequest } from '../../src/remix_adapter.js'
 
 test.group('createRemixHeaders', () => {
   test('handles empty headers', ({ expect }) => {

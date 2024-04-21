@@ -14,11 +14,23 @@
 Create a fresh remix-adonisjs project using the [Remix starter template](https://github.com/jarle/remix-starter-kit):
 
 ```
-npm init adonisjs -- -K="github:jarle/remix-starter-kit"
+npm init adonisjs@latest -- -K="github:jarle/remix-starter-kit"
 ```
 
 You should now be able to start building.
 Just jump into your new folder and start the dev server with `npm run dev`.
+
+You can create new Remix routes with the command:
+```
+node ace remix:route my-route
+```
+
+There are flags for including Remix-specific functionality in the route.
+Example for adding a server action:
+
+```
+node ace remix:route --action my-route
+```
 
 
 ## Documentation

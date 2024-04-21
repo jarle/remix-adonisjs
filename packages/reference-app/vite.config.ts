@@ -2,10 +2,7 @@ import adonisjs from '@adonisjs/vite/client'
 import { vitePlugin as remix } from '@remix-run/dev'
 import { defineConfig } from 'vite'
 
-export default defineConfig({
-  server: {
-    port: 3000,
-  },
+export default defineConfig(({ isSsrBuild }) => ({
   base: '/assets/',
   plugins: [
     remix({
@@ -18,8 +15,10 @@ export default defineConfig({
     }),
   ],
   optimizeDeps: {
-    esbuildOptions: {
-      target: 'ES2022',
-    },
+    esbuildOptions: isSsrBuild
+      ? {
+          target: 'ES2022',
+        }
+      : {},
   },
-})
+}))
