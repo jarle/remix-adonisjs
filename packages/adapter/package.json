@@ -37,7 +37,7 @@
     "copy:readme": "copyfiles -u 2 \"../../*.md\" build",
     "format": "prettier --write .",
     "lint": "eslint . --ext=.ts",
-    "postcompile": "npm run copy:templates && npm run index:commands",
+    "postcompile": "npm run copy:templates && npm run copy:readme && npm run index:commands",
     "precompile": "npm run lint",
     "prepublishOnly": "npm run build",
     "quick:test": "node --enable-source-maps --loader=ts-node/esm bin/test.ts",
