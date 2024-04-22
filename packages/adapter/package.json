@@ -34,6 +34,7 @@
     "clean": "del-cli build",
     "compile": "npm run clean && tsc",
     "copy:templates": "copyfiles \"stubs/**/**/*.stub\" build",
+    "copy:readme": "copyfiles -u 2 \"../../*.md\" build",
     "format": "prettier --write .",
     "lint": "eslint . --ext=.ts",
     "postcompile": "npm run copy:templates && npm run index:commands",
