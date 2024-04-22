@@ -32,6 +32,9 @@ Example for adding a server action:
 node ace remix:route --action my-route
 ```
 
+Ready to build?
+Check out the guide on [how to set up a login flow](https://remix-adonisjs.matstack.dev/hands-on/building-a-login-flow.html) to get familiar with remix-adonisjs.
+
 
 ## Documentation
 
@@ -50,6 +53,6 @@ You can hack on the project by using the [reference application](./packages/refe
 A good start is to check out issues marked with [help wanted](https://github.com/jarle/remix-adonisjs/labels/help%20wanted) and see if you can contribute either with code or your opinion/experience.
 
 Some other ideas for improvements:
-- Documentation
+- [Documentation](https://github.com/jarle/remix-adonisjs-docs)
 - Ease of setup
 - Project structure
