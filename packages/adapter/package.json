@@ -101,7 +101,7 @@
   "bugs": {
     "url": "https://github.com/jarle/remix-adonisjs/issues"
   },
-  "homepage": "https://github.com/jarle/remix-adonisjs#readme",
+  "homepage": "https://remix-adonisjs.matstack.dev",
   "prettier": "@adonisjs/prettier-config",
   "publishConfig": {
     "access": "public",

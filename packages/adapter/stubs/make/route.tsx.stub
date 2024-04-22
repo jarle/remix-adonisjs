@@ -37,9 +37,7 @@ export const clientLoader = async ({ request, params, serverLoader }: ClientLoad
 
 export const action = ({ context }: ActionFunctionArgs) => {
   const { http, make } = context
-  return json({
-    message: 'Hello',
-  })
+  return null
 }
 {{/if}}
 {{#if flags["client-action"]}}

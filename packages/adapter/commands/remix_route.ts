@@ -73,6 +73,7 @@ export default class MakeRemixRoute extends BaseCommand {
 
     if (this.action) {
       node.add('ActionFunctionArgs')
+      react.add('useActionData')
     }
     if (this.clientAction) {
       node.add('ClientActionFunctionArgs')
