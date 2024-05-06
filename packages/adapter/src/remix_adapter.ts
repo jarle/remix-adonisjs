@@ -1,8 +1,8 @@
-import { IncomingHttpHeaders } from 'node:http'
+import type { IncomingHttpHeaders } from 'node:http'
 
-import { Container } from '@adonisjs/core/container'
-import { HttpContext } from '@adonisjs/core/http'
-import { ContainerBindings } from '@adonisjs/core/types'
+import type { Container } from '@adonisjs/core/container'
+import type { HttpContext } from '@adonisjs/core/http'
+import type { ContainerBindings } from '@adonisjs/core/types'
 import type { Request as AdonisRequest, Response as AdonisResponse } from '@adonisjs/http-server'
 import {
   AppLoadContext,

@@ -1,10 +1,10 @@
 /// <reference types="@adonisjs/vite/vite_provider" />
 
 import path from 'node:path'
-import { RequestHandler, createRequestHandler } from '../src/remix_adapter.js'
+import type { RequestHandler } from '../src/remix_adapter.js'
 
 import { HttpContext } from '@adonisjs/core/http'
-import { ApplicationService } from '@adonisjs/core/types'
+import type { ApplicationService } from '@adonisjs/core/types'
 import { pathToFileURL } from 'node:url'
 import '../src/types/main.js'
 
@@ -29,6 +29,7 @@ export default class RemixProvider {
   constructor(protected app: ApplicationService) {}
 
   async boot() {
+    const { createRequestHandler } = await import('../src/remix_adapter.js')
     const env = this.app.getEnvironment()
     if (env !== 'web' && env !== 'test') {
       return
