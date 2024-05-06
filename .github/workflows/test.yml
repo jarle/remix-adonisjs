@@ -1,6 +1,9 @@
 name: test
 on:
-  - push
+  push:
+  schedule:
+    - cron: '0 16 * * *'
+
 jobs:
   linux:
     runs-on: ubuntu-latest
