@@ -40,7 +40,7 @@
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.78",
     "@types/react-dom": "^18.2.25",
-    "eslint": "^8.57.0",
+    "eslint": "^9.2.0",
     "hot-hook": "^0.2.0",
     "prettier": "^3.2.5",
     "ts-node": "^10.9.2",
