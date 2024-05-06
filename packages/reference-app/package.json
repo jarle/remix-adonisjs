@@ -63,7 +63,7 @@
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
     "@remix-run/serve": "^2.8.1",
-    "@vinejs/vine": "^1.8.0",
+    "@vinejs/vine": "^2.0.0",
     "edge.js": "^6.0.1",
     "isbot": "^4",
     "luxon": "^3.4.4",
