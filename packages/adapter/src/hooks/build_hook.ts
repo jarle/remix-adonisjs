@@ -9,7 +9,7 @@ import path from 'node:path'
  */
 export default async function remixBuildHook({ logger }: Parameters<AssemblerHookHandler>[0]) {
   logger.info('building remix app with vite')
-  await runCommand('remix vite:build')
+  await runCommand('npx remix vite:build')
   // const cli = await import('@remix-run/dev')
   // await cli.run(['vite:build'])
   fs.mkdirSync('build/public/assets', { recursive: true })
