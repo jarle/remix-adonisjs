@@ -1,11 +1,9 @@
 /// <reference types="@adonisjs/vite/vite_provider" />
 
-import path from 'node:path'
 import type { RequestHandler } from '../src/remix_adapter.js'
 
 import { HttpContext } from '@adonisjs/core/http'
 import type { ApplicationService } from '@adonisjs/core/types'
-import { pathToFileURL } from 'node:url'
 import '../src/types/main.js'
 
 declare module '@adonisjs/core/types' {
@@ -22,11 +20,11 @@ declare module '@adonisjs/core/http' {
 
 export default class RemixProvider {
   static needsApplication = true
-  private remixBundle = pathToFileURL(
-    path.join(process.cwd(), 'build/remix/server/server.js')
-  ).toString()
+  private remixBundle: string
 
-  constructor(protected app: ApplicationService) {}
+  constructor(protected app: ApplicationService) {
+    this.remixBundle = app.makeURL('remix/server/server.js').href
+  }
 
   async boot() {
     const { createRequestHandler } = await import('../src/remix_adapter.js')
