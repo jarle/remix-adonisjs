@@ -32,11 +32,14 @@ export default class RemixProvider {
     if (env !== 'web' && env !== 'test') {
       return
     }
+
     const vite = await this.app.container.make('vite')
     const devServer = vite.getDevServer()
-    const build = devServer
-      ? () => devServer?.ssrLoadModule('virtual:remix/server-build')
-      : await import(this.remixBundle)
+    const build =
+      this.app.inDev && devServer
+        ? () => devServer.ssrLoadModule('virtual:remix/server-build')
+        : await import(this.remixBundle)
+
     const requestHandler = createRequestHandler({
       build,
       getLoadContext: (context) => ({
