@@ -1,5 +1,7 @@
 name: test
 on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
   push:
   schedule:
     - cron: '0 16 * * *'
