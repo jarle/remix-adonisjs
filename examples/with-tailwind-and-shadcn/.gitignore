@@ -24,11 +24,5 @@ yarn-error.log
 # Platform specific
 .DS_Store
 
-screenshots/
-public/assets/
-
-*/.vitepress/dist
-*/.vitepress/cache
-
+vite.config.*.timestamp-*
 package-lock.json
-yarn.lock
