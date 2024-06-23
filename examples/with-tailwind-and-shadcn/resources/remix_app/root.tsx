@@ -6,10 +6,10 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
+  useLoaderData
 } from '@remix-run/react'
-import { cn } from './lib/utils'
 import { userPrefs } from './cookie.server'
+import { cn } from './lib/utils'
 
 import '~/styles/tailwind.css'
 
@@ -31,7 +31,7 @@ export async function action({ request }: ActionFunctionArgs) {
   return redirect('/', { headers: { 'Set-Cookie': freshCookie } })
 }
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export default function Page({ children }: { children: React.ReactNode }) {
   const { prefersDarkMode } = useLoaderData<typeof loader>()
   return (
     <html lang="en" className={cn(prefersDarkMode && 'dark')}>
@@ -48,12 +48,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <button type="submit">{prefersDarkMode ? 'Light' : 'Dark'} mode</button>
         </Form>
         <ScrollRestoration />
+        <Outlet />
         <Scripts />
       </body>
     </html>
   )
-}
-
-export default function App() {
-  return <Outlet />
 }
