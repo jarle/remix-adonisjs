@@ -15,43 +15,56 @@ export default function Index() {
   const { message } = useLoaderData<typeof loader>()
 
   return (
-    <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
-      <h1>Welcome to Remix</h1>
-      <p>{message}</p>
-      <ul>
+    <div className='flex flex-col gap-7'>
+      <div className='flex flex-col gap-3'>
+        <h1 className='text-4xl font-black'>Welcome to Remix</h1>
+        <p className='font-thin text-lg'>{message}</p>
+      </div>
+      <ul className='list-disc'>
         <li>
-          <a target="_blank" href="https://remix.run/tutorials/blog" rel="noreferrer">
+          <a className='hover:font-semibold'
+            target="_blank"
+            href="https://remix.run/tutorials/blog"
+            rel="noreferrer">
             15m Quickstart Blog Tutorial
           </a>
         </li>
         <li>
-          <a target="_blank" href="https://remix.run/tutorials/jokes" rel="noreferrer">
+          <a className='hover:font-semibold'
+            target="_blank"
+            href="https://remix.run/tutorials/blog"
+            rel="noreferrer">
             Deep Dive Jokes App Tutorial
           </a>
         </li>
         <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
+          <a className='hover:font-semibold'
+            target="_blank"
+            href="https://remix.run/tutorials/blog"
+            rel="noreferrer">
             Remix Docs
           </a>
         </li>
       </ul>
 
-      <Popover>
-        <PopoverTrigger className="bg-slate-700 rounded py-1 px-2 border-2 text-slate-200">
-          Open shadcn/ui popover
-        </PopoverTrigger>
-        <PopoverContent>
-          Find more components in{' '}
-          <a
-            className="text-slate-500"
-            target="_blank"
-            href="https://ui.shadcn.com/docs/components/accordion"
-          >
-            here
-          </a>
-          .
-        </PopoverContent>
-      </Popover>
+      <div>
+        <Popover>
+          <PopoverTrigger className="bg-slate-700 hover:bg-slate-800 py-3 px-5 rounded-md hover:shadow-md border-2 text-slate-200">
+            Open shadcn/ui popover
+          </PopoverTrigger>
+          <PopoverContent>
+            Find more components in{' '}
+            <a
+              className="text-slate-500"
+              target="_blank"
+              href="https://ui.shadcn.com/docs/components/accordion"
+            >
+              here
+            </a>
+            .
+          </PopoverContent>
+        </Popover>
+      </div>
     </div>
   )
 }
