@@ -14,8 +14,9 @@ export default async function remixBuildHook({ logger }: Parameters<AssemblerHoo
   const config = await resolveViteConfig()
   // const cli = await import('@remix-run/dev')
   // await cli.run(['vite:build'])
-  const source = app.makePath('build', 'remix', 'client')
-  const target = app.makePath('build', 'public', 'assets', config?.base ?? '/')
+  const assetsDir = config?.build?.assetsDir ?? 'assets'
+  const source = app.makePath('build', 'remix', 'client', assetsDir)
+  const target = app.makePath('build', 'public', assetsDir, config?.base ?? '/')
   moveDirectorySync(source, target)
 }
 
