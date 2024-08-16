@@ -1,3 +1,4 @@
+import app from '@adonisjs/core/services/app'
 import type { AssemblerHookHandler } from '@adonisjs/core/types/app'
 import { spawn } from 'node:child_process'
 import fs from 'node:fs'
@@ -10,16 +11,15 @@ import path from 'node:path'
 export default async function remixBuildHook({ logger }: Parameters<AssemblerHookHandler>[0]) {
   logger.info('building remix app with vite')
   await runCommand('npx remix vite:build')
+  const config = await resolveViteConfig()
   // const cli = await import('@remix-run/dev')
   // await cli.run(['vite:build'])
-  fs.mkdirSync('build/public/assets', { recursive: true })
-  const source = 'build/remix/client'
-  const target = 'build/public/assets'
-
-  copyDirectorySync(source, target)
+  const source = app.makePath('build', 'remix', 'client')
+  const target = app.makePath('build', 'public', 'assets', config?.base ?? '/')
+  moveDirectorySync(source, target)
 }
 
-function copyDirectorySync(source: string, target: string) {
+function moveDirectorySync(source: string, target: string) {
   fs.mkdirSync(target, { recursive: true })
 
   const entries = fs.readdirSync(source, { withFileTypes: true })
@@ -29,9 +29,9 @@ function copyDirectorySync(source: string, target: string) {
     const targetPath = path.join(target, entry.name)
 
     if (entry.isDirectory()) {
-      copyDirectorySync(sourcePath, targetPath)
+      moveDirectorySync(sourcePath, targetPath)
     } else {
-      fs.copyFileSync(sourcePath, targetPath)
+      fs.renameSync(sourcePath, targetPath)
     }
   }
 }
@@ -57,9 +57,20 @@ async function runCommand(command: string, args = []) {
         reject(new Error(`Command failed with code ${code}: ${stderr}`))
       }
     })
-
-    subprocess.on('error', (err) => {
-      reject(new Error(`Failed to start command: ${err.message}`))
-    })
   })
+}
+
+export async function resolveViteConfig() {
+  let vite = await import('vite')
+
+  let viteConfig = await vite.loadConfigFromFile({
+    command: 'build',
+    mode: 'production',
+  })
+
+  if (typeof viteConfig?.config.build?.manifest === 'string') {
+    throw new Error('Custom Vite manifest paths are not supported')
+  }
+
+  return viteConfig?.config
 }
