@@ -42,7 +42,7 @@ const sessionConfig: SessionConfig = {
   cookie: {},
 }
 
-export const remixHandler = (requestHandler: RequestHandler) =>
+export const remixHandler = (requestHandler: RequestHandler): Server =>
   createServer(async (req, res) => {
     const request = new RequestFactory().merge({ req, res, encryption }).create()
     const response = new ResponseFactory().merge({ req, res, encryption }).create()
