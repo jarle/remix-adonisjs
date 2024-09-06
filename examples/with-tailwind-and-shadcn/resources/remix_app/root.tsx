@@ -20,7 +20,7 @@ export async function loader({ context }: LoaderFunctionArgs) {
 }
 
 // See the docs for more complex intent validation:
-// https://remix-adonisjs.matstack.dev/recipes/validate-action-intent
+// https://matstack.dev/remix-adonisjs/recipes/validate-action-intent
 const actionValidator = vine.compile(vine.object({
   intent: vine.enum(['toggleColorScheme'])
 }))

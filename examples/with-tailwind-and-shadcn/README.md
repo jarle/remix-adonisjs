@@ -30,6 +30,6 @@ Some amazing resources:
 
 - AdonisJS [docs](https://adonisjs.com/) and [tutorial](https://adocasts.com/series/lets-learn-adonisjs-6)
 - Remix [docs](https://remix.run/docs/en/main)
-- AdonisJS + Remix [hands-on guide](https://remix-adonisjs.matstack.dev/hands-on/building-a-login-flow)
+- AdonisJS + Remix [hands-on guide](https://matstack.dev/remix-adonisjs/hands-on/building-a-login-flow)
 - [Tailwind CSS](https://tailwindcss.com/) detailed docs on the utility classes.
 - [shadcn/ui](https://ui.shadcn.com/) documentation for the list of available components.

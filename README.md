@@ -8,7 +8,7 @@
 - Mailer
 - Dependency injection
 
-...and much, much more from the AdonisJS 6 ecosystem. Read [the about section](https://remix-adonisjs.matstack.dev/about.html) if you want to learn more.
+...and much, much more from the AdonisJS 6 ecosystem. Read [the about section](https://matstack.dev/remix-adonisjs/about.html) if you want to learn more.
 
 ## Quickstart
 
@@ -35,11 +35,11 @@ node ace remix:route --action my-route
 ```
 
 Ready to build?
-Check out the guide on [how to set up a login flow](https://remix-adonisjs.matstack.dev/hands-on/building-a-login-flow.html) to get familiar with remix-adonisjs.
+Check out the guide on [how to set up a login flow](https://matstack.dev/remix-adonisjs/hands-on/building-a-login-flow.html) to get familiar with remix-adonisjs.
 
 ## Documentation
 
-Guides for remix-adonisjs can be found in the [official documentation](https://remix-adonisjs.matstack.dev/)
+Guides for remix-adonisjs can be found in the [official documentation](https://matstack.dev/remix-adonisjs/)
 
 For implementation details/reference, refer to the official documentation for the two frameworks:
 
