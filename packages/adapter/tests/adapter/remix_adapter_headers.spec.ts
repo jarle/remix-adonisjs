@@ -1,7 +1,7 @@
 import { RequestFactory, ResponseFactory } from '@adonisjs/core/factories/http'
 import { test } from '@japa/runner'
 import { RequestOptions, ResponseOptions, createRequest, createResponse } from 'node-mocks-http'
-import { ServerResponse } from 'node:http'
+import { IncomingMessage, ServerResponse } from 'node:http'
 import { createRemixHeaders, createRemixRequest } from '../../src/remix_adapter.js'
 
 test.group('createRemixHeaders', () => {
@@ -77,7 +77,7 @@ test.group('Remix Adapter Tests', () => {
 function testRequest(options?: RequestOptions | undefined) {
   return new RequestFactory()
     .merge({
-      req: createRequest(options),
+      req: createRequest<IncomingMessage>(options),
     })
     .create()
 }
