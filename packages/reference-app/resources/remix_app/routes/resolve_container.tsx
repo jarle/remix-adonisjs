@@ -1,11 +1,11 @@
-import { LoaderFunctionArgs, json } from '@remix-run/node'
+import { LoaderFunctionArgs } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 
 export const loader = async ({ context }: LoaderFunctionArgs) => {
   const app = await context.make('app')
-  return json({
+  return {
     env: app.getEnvironment(),
-  })
+  }
 }
 
 export default function Page() {
