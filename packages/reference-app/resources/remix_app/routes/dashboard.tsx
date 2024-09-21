@@ -1,10 +1,10 @@
-import { LoaderFunctionArgs, json } from '@remix-run/node'
+import { LoaderFunctionArgs } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 
 export const loader = ({ context }: LoaderFunctionArgs) => {
   const { http } = context
 
-  return json(http.session.all())
+  return http.session.all()
 }
 export default function Page() {
   const data = useLoaderData()

@@ -80,7 +80,6 @@ export default class MakeRemixRoute extends BaseCommand {
     }
     if (this.loader) {
       node.add('LoaderFunctionArgs')
-      node.add('json')
       react.add('useLoaderData')
     }
     if (this.clientLoader) {
