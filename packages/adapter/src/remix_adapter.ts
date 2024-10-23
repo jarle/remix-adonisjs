@@ -103,7 +103,9 @@ export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Req
 export async function sendRemixResponse(ctx: HttpContext, webResponse: Response) {
   const res = ctx.response
   res.response.statusMessage = webResponse.statusText
-  res.status(webResponse.status)
+  if (res.getStatus() === 200) {
+    res.status(webResponse.status)
+  }
 
   debug('Commit session early for remix response')
   ctx.session?.commit()
