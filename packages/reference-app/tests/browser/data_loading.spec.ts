@@ -6,6 +6,12 @@ test('basic page with no loader', async ({ visit }) => {
   await page.screenshot({ path: 'tests/screenshots/root.png' })
 })
 
+test('adonisjs redirect', async ({ visit }) => {
+  const page = await visit('/adonis_redirect')
+
+  await page.waitForURL('/login')
+})
+
 test('basic page with loader', async ({ visit, assert }) => {
   const page = await visit('/profile')
 
