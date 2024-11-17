@@ -17,6 +17,11 @@ export default function App() {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
         />
+        <link
+          rel="icon"
+          type="image/png"
+          href='/favicon.png'
+        />
         <Links />
       </head>
       <body>
