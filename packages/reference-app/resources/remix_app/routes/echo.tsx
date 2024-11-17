@@ -1,12 +1,12 @@
-import { LoaderFunctionArgs, json } from '@remix-run/node'
+import { LoaderFunctionArgs } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 
 export const loader = ({ request }: LoaderFunctionArgs) => {
   const params = new URL(request.url).searchParams
 
-  return json({
+  return {
     message: params.get('message'),
-  })
+  }
 }
 
 export default function Page() {
