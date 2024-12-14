@@ -1,19 +1,14 @@
 {{{
   exports({ to: app.makePath('resources/remix_app/root.tsx') })
 }}}
-import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction } from "@react-router/node";
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
-
-export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-];
+} from "react-router";
 
 export default function App() {
   return (

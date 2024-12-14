@@ -26,3 +26,6 @@ yarn-error.log
 
 vite.config.*.timestamp-*
 package-lock.json
+
+# React-Router types folder
+.react-router/

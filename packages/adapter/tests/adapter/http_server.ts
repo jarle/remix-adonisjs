@@ -8,7 +8,7 @@ import {
 import { SessionMiddlewareFactory } from '@adonisjs/session/factories'
 import { SessionConfig } from '@adonisjs/session/types'
 import { getActiveTest } from '@japa/runner'
-import { RequestHandler } from '@remix-run/node'
+import { RequestHandler } from 'react-router'
 import getPort from 'get-port'
 import { IncomingMessage, Server, ServerResponse, createServer } from 'node:http'
 import debug from '../../src/debug.js'
