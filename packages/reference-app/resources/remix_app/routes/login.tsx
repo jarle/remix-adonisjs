@@ -1,5 +1,5 @@
-import { ActionFunctionArgs, redirect } from 'react-router';
-import { Form } from 'react-router';
+import { ActionFunctionArgs, redirect } from 'react-router'
+import { Form } from 'react-router'
 
 export const action = async ({ context }: ActionFunctionArgs) => {
   const { http } = context
