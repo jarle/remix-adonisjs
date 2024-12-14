@@ -7,15 +7,14 @@ export async function configure(command: Configure) {
   const codemods = await command.createCodemods()
 
   const dependencies = [
-    '@remix-run/css-bundle',
-    '@remix-run/node',
-    '@remix-run/react',
-    '@remix-run/serve',
+    '@react-router/node',
+    '@react-router/serve',
     'react',
     'react-dom',
+    'react-router',
   ]
 
-  const devDependencies = ['@remix-run/dev', '@types/react', '@types/react-dom']
+  const devDependencies = ['@react-router/dev', '@types/react', '@types/react-dom']
 
   await codemods.installPackages(
     dependencies.map((name) => ({

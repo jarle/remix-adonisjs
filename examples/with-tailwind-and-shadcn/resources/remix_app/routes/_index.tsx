@@ -1,5 +1,5 @@
-import { json, type LoaderFunctionArgs, type MetaFunction } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
+import { type LoaderFunctionArgs, type MetaFunction } from 'react-router'
+import { useLoaderData } from 'react-router'
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover'
 
 export const meta: MetaFunction = () => {
@@ -8,40 +8,46 @@ export const meta: MetaFunction = () => {
 
 export const loader = async ({ context }: LoaderFunctionArgs) => {
   const service = await context.make('hello_service')
-  return json({ message: service.getMessage() })
+  return { message: service.getMessage() }
 }
 
 export default function Index() {
   const { message } = useLoaderData<typeof loader>()
 
   return (
-    <div className='flex flex-col gap-7'>
-      <div className='flex flex-col gap-3'>
-        <h1 className='text-4xl font-black'>Welcome to Remix</h1>
-        <p className='font-thin text-lg'>{message}</p>
+    <div className="flex flex-col gap-7">
+      <div className="flex flex-col gap-3">
+        <h1 className="text-4xl font-black">Welcome to Remix</h1>
+        <p className="font-thin text-lg">{message}</p>
       </div>
-      <ul className='list-disc'>
+      <ul className="list-disc">
         <li>
-          <a className='hover:font-semibold'
+          <a
+            className="hover:font-semibold"
             target="_blank"
             href="https://remix.run/tutorials/blog"
-            rel="noreferrer">
+            rel="noreferrer"
+          >
             15m Quickstart Blog Tutorial
           </a>
         </li>
         <li>
-          <a className='hover:font-semibold'
+          <a
+            className="hover:font-semibold"
             target="_blank"
             href="https://remix.run/tutorials/blog"
-            rel="noreferrer">
+            rel="noreferrer"
+          >
             Deep Dive Jokes App Tutorial
           </a>
         </li>
         <li>
-          <a className='hover:font-semibold'
+          <a
+            className="hover:font-semibold"
             target="_blank"
             href="https://remix.run/tutorials/blog"
-            rel="noreferrer">
+            rel="noreferrer"
+          >
             Remix Docs
           </a>
         </li>

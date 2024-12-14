@@ -1,5 +1,5 @@
-import { LoaderFunctionArgs } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
+import { LoaderFunctionArgs } from 'react-router'
+import { useLoaderData } from 'react-router'
 
 export const loader = ({ request }: LoaderFunctionArgs) => {
   const params = new URL(request.url).searchParams

@@ -1,13 +1,5 @@
-import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
-import {
-  Form,
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLoaderData
-} from '@remix-run/react'
+import { ActionFunctionArgs, LoaderFunctionArgs } from 'react-router'
+import { Form, Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from 'react-router'
 import { cn } from './lib/utils'
 
 import vine from '@vinejs/vine'
@@ -16,14 +8,16 @@ import '~/styles/tailwind.css'
 export async function loader({ context }: LoaderFunctionArgs) {
   const { http } = context
   const prefersDarkMode = http.session.get('prefersDarkMode') || false
-  return json({ prefersDarkMode })
+  return { prefersDarkMode }
 }
 
 // See the docs for more complex intent validation:
 // https://matstack.dev/remix-adonisjs/recipes/validate-action-intent
-const actionValidator = vine.compile(vine.object({
-  intent: vine.enum(['toggleColorScheme'])
-}))
+const actionValidator = vine.compile(
+  vine.object({
+    intent: vine.enum(['toggleColorScheme']),
+  })
+)
 
 export async function action({ context }: ActionFunctionArgs) {
   const { http } = context
@@ -49,7 +43,9 @@ export default function Page({ children }: { children: React.ReactNode }) {
         {children}
         <Form method="post">
           <input type="hidden" name="intent" value="toggleColorScheme" />
-          <button className='underline' type="submit">{prefersDarkMode ? 'Light' : 'Dark'} mode</button>
+          <button className="underline" type="submit">
+            {prefersDarkMode ? 'Light' : 'Dark'} mode
+          </button>
         </Form>
         <ScrollRestoration />
         <Outlet />

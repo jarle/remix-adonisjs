@@ -1,5 +1,5 @@
 import type { LoaderContext } from '../remix_adapter.js'
 
-declare module '@remix-run/node' {
+declare module 'react-router' {
   export interface AppLoadContext extends LoaderContext {}
 }

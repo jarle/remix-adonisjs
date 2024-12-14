@@ -37,7 +37,7 @@ export default class RemixProvider {
     const devServer = vite.getDevServer()
     const build =
       (this.app.inDev || this.app.inTest) && devServer
-        ? () => devServer.ssrLoadModule('virtual:remix/server-build')
+        ? () => devServer.ssrLoadModule('virtual:react-router/server-build')
         : await import(this.remixBundle)
 
     const requestHandler = createRequestHandler({
