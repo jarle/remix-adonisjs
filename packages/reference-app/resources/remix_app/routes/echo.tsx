@@ -1,7 +1,7 @@
-import { LoaderFunctionArgs } from 'react-router'
 import { useLoaderData } from 'react-router'
+import { Route } from './+types/echo.js'
 
-export const loader = ({ request }: LoaderFunctionArgs) => {
+export const loader = ({ request }: Route.LoaderArgs) => {
   const params = new URL(request.url).searchParams
 
   return {

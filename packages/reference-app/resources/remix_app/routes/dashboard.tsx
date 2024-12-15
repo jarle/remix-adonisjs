@@ -1,7 +1,7 @@
-import { LoaderFunctionArgs } from 'react-router'
 import { useLoaderData } from 'react-router'
+import { Route } from './+types/dashboard.js'
 
-export const loader = ({ context }: LoaderFunctionArgs) => {
+export const loader = ({ context }: Route.LoaderArgs) => {
   const { http } = context
 
   return http.session.all()

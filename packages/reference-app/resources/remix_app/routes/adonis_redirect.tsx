@@ -1,6 +1,6 @@
-import type { LoaderFunctionArgs } from 'react-router'
+import { Route } from "./+types/adonis_redirect.js"
 
-export const loader = async ({ context }: LoaderFunctionArgs) => {
+export const loader = async ({ context }: Route.LoaderArgs) => {
   const { http } = context
 
   http.response.redirect('/login')

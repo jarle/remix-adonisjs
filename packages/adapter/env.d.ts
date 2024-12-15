@@ -1,5 +1,5 @@
-import type { LoaderContext } from './src/types/main.js';
+import type { AdonisApplicationContext } from './src/types/main.js'
 
 declare module 'react-router' {
-  interface AppLoadContext extends LoaderContext { }
+  interface AppLoadContext extends AdonisApplicationContext {}
 }

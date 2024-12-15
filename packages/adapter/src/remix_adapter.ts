@@ -20,7 +20,7 @@ export type HandlerContext = {
   container: Container<ContainerBindings>
 }
 
-export type LoaderContext = {
+export type AdonisApplicationContext = {
   http: HttpContext
   make: Container<ContainerBindings>['make']
 }

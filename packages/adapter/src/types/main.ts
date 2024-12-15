@@ -1,1 +1,1 @@
-export type { LoaderContext } from '../remix_adapter.js'
+export type { AdonisApplicationContext } from '../remix_adapter.js'

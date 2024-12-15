@@ -4,8 +4,7 @@
     "**/*",
     "**/.server/**/*",
     "**/.client/**/*",
-    ".react-router/types/**/*",
-    "@matstack/remix-adonisjs/types"
+    ".react-router/types/**/*"
   ],
   "compilerOptions": {
     "rootDirs": ["./", "./.react-router/types"],
