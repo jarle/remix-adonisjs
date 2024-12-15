@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node bin/server.js",
+    "prebuild": "react-router typegen",
     "build": "node ace build",
     "dev": "node ace serve",
     "test": "node ace test",

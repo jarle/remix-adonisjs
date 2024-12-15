@@ -68,49 +68,48 @@ export default class MakeRemixRoute extends BaseCommand {
   protected stubPath: string = 'make/route.tsx.stub'
 
   private getImports() {
-    const node = new Set()
-    const react = new Set()
+    const localType = new Set()
+    const router = new Set()
 
     if (this.action) {
-      node.add('ActionFunctionArgs')
-      react.add('useActionData')
+      localType.add('Route')
+      router.add('useActionData')
     }
     if (this.clientAction) {
-      node.add('ClientActionFunctionArgs')
+      localType.add('Route')
     }
     if (this.loader) {
-      node.add('LoaderFunctionArgs')
-      react.add('useLoaderData')
+      localType.add('Route')
+      router.add('useLoaderData')
     }
     if (this.clientLoader) {
-      node.add('ClientLoaderFunctionArgs')
+      localType.add('Route')
     }
     if (this.meta) {
-      node.add('MetaFunction')
+      router.add('MetaFunction')
     }
     if (this.errorBoundary) {
-      react.add('isRouteErrorResponse')
-      react.add('useRouteError')
+      router.add('isRouteErrorResponse')
+      router.add('useRouteError')
     }
     if (this.headers) {
-      node.add('HeadersFunction')
+      router.add('HeadersFunction')
     }
     return {
-      node,
-      react,
+      router,
+      localType,
     }
   }
 
   async run() {
     const imports = this.getImports()
     const codemods = await this.createCodemods()
-    console.log(this.parsed.flags)
     await codemods.makeUsingStub(stubsRoot, this.stubPath, {
       flags: this.parsed.flags,
       name: this.name,
       imports: {
-        node: [...imports.node].join(', '),
-        react: [...imports.react].join(', '),
+        localType: [...imports.localType].join(', '),
+        router: [...imports.router].join(', '),
       },
     })
   }

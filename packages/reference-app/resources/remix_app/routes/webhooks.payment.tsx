@@ -8,3 +8,11 @@ export const action = async ({ request, context }: Route.ActionArgs) => {
     status: 'ok',
   })
 }
+
+
+export function headers({ }: Route.HeadersArgs) {
+  return {
+    "X-Stretchy-Pants": "its for fun",
+    "Cache-Control": "max-age=300, s-maxage=3600",
+  };
+}

@@ -6,15 +6,15 @@
     to: app.makePath('resources/remix_app/routes', routeFileName)
   })
 }}}
-{{#if imports.node}}
-import { {{imports.node}} } from '@remix-run/node'
+{{#if imports.router}}
+import { {{imports.router}} } from 'react-router'
 {{/if}}
-{{#if imports.react}}
-import { {{imports.react}} } from '@remix-run/react'
+{{#if imports.localType}}
+import { {{imports.localType}} } from './+types/{{entity.name}}'
 {{/if}}
 {{{#if flags.loader}}}
 
-export const loader = ({ context }: LoaderFunctionArgs) => {
+export async function loader({ context }: Route.LoaderArgs) {
   const { http, make } = context
   return {
     message: 'Hello from ' + http.request.completeUrl(),
@@ -23,8 +23,7 @@ export const loader = ({ context }: LoaderFunctionArgs) => {
 {{{/if}}}
 {{#if flags["client-loader"]}}
 
-// https://remix.run/docs/en/main/route/client-loader
-export const clientLoader = async ({ request, params, serverLoader }: ClientLoaderFunctionArgs) => {
+export async function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {
   // call the server loader
   const serverData = await serverLoader();
   // And/or fetch data on the client
@@ -34,16 +33,15 @@ export const clientLoader = async ({ request, params, serverLoader }: ClientLoad
 }
 {{/if}}
 {{#if flags.action}}
-
-export const action = ({ context }: ActionFunctionArgs) => {
+export async function action({ context }: Route.ActionArgs) {
   const { http, make } = context
   return null
 }
+
 {{/if}}
 {{#if flags["client-action"]}}
 
-// https://remix.run/docs/en/main/route/client-action
-export const clientAction = async ({ request, params, serverAction }: ClientActionFunctionArgs) => {
+export async function clientAction({ serverAction }: Route.ClientActionArgs) {
   // invalidateClientSideCache()
   const data = await serverAction()
   return data
@@ -51,23 +49,18 @@ export const clientAction = async ({ request, params, serverAction }: ClientActi
 {{/if}}
 {{#if flags.meta}}
 
-// https://remix.run/docs/en/main/route/meta
-export const meta: MetaFunction = () => {
+export function meta({ }: Route.MetaArgs) {
   return [{ title: '{{{name}}}' }, { name: 'description', content: 'Route {{{name}}}' }]
 }
 {{/if}}
 {{#if flags.headers}}
 
-// https://remix.run/docs/en/main/route/headers
-export const headers: HeadersFunction = ({
-  actionHeaders,
-  errorHeaders,
-  loaderHeaders,
-  parentHeaders,
-}) => ({
-  'X-Stretchy-Pants': 'its for fun',
-  'Cache-Control': 'max-age=300, s-maxage=3600',
-})
+export function headers({ }: Route.HeadersArgs) {
+  return {
+    "X-Stretchy-Pants": "its for fun",
+    "Cache-Control": "max-age=300, s-maxage=3600",
+  };
+}
 {{/if}}
 
 export default function Page() {
@@ -81,7 +74,6 @@ export default function Page() {
 }
 {{#if flags['error-boundary']}}
 
-// https://remix.run/docs/en/main/route/error-boundary
 export function ErrorBoundary() {
   const error = useRouteError();
 
