@@ -7,7 +7,6 @@ export async function configure(command: Configure) {
   const codemods = await command.createCodemods()
 
   const dependencies = [
-    '@remix-run/css-bundle',
     '@remix-run/node',
     '@remix-run/react',
     '@remix-run/serve',

@@ -32,3 +32,5 @@ public/assets/
 
 package-lock.json
 yarn.lock
+
+.react-router/

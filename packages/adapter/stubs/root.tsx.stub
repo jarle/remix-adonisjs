@@ -1,7 +1,6 @@
 {{{
   exports({ to: app.makePath('resources/remix_app/root.tsx') })
 }}}
-import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction } from "@remix-run/node";
 import {
   Links,

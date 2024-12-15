@@ -1,4 +1,4 @@
-import { Await, useLoaderData } from '@remix-run/react'
+import { Await, useLoaderData } from 'react-router'
 import { Suspense } from 'react'
 
 export const loader = async () => {

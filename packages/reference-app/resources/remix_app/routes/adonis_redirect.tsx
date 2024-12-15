@@ -1,4 +1,4 @@
-import type { LoaderFunctionArgs } from '@remix-run/node'
+import type { LoaderFunctionArgs } from 'react-router'
 
 export const loader = async ({ context }: LoaderFunctionArgs) => {
   const { http } = context
@@ -6,14 +6,10 @@ export const loader = async ({ context }: LoaderFunctionArgs) => {
   http.response.redirect('/login')
 
   return {
-    message: 'Hello, world!'
+    message: 'Hello, world!',
   }
 }
 
 export default function Page() {
-  return (
-    <div>
-      This should not be visible
-    </div>
-  )
+  return <div>This should not be visible</div>
 }
