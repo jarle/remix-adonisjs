@@ -93,7 +93,7 @@ export default class MakeRemixRoute extends BaseCommand {
       router.add('useRouteError')
     }
     if (this.headers) {
-      router.add('HeadersFunction')
+      localType.add('Route')
     }
     return {
       router,
