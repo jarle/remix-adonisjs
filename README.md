@@ -52,6 +52,10 @@ For implementation details/reference, refer to the official documentation for th
 - [Remix documentation](https://remix.run/docs/)
 - [AdonisJS documentation](https://docs.adonisjs.com/)
 
+## Discussion
+
+The recommended place to discuss remix-adonisjs is on [GitHub Discussions](https://github.com/jarle/remix-adonisjs/discussions).
+
 ## Contributing
 
 Contributions are _very_ welcome ❤️
