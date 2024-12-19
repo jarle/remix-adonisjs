@@ -1,19 +1,15 @@
-import type { LoaderFunctionArgs } from '@remix-run/node'
+import { Route } from "./+types/adonis_redirect.js"
 
-export const loader = async ({ context }: LoaderFunctionArgs) => {
+export const loader = async ({ context }: Route.LoaderArgs) => {
   const { http } = context
 
   http.response.redirect('/login')
 
   return {
-    message: 'Hello, world!'
+    message: 'Hello, world!',
   }
 }
 
 export default function Page() {
-  return (
-    <div>
-      This should not be visible
-    </div>
-  )
+  return <div>This should not be visible</div>
 }

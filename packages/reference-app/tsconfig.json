@@ -1,10 +1,17 @@
 {
   "extends": "@adonisjs/tsconfig/tsconfig.app.json",
+  "include": [
+    "**/*",
+    "**/.server/**/*",
+    "**/.client/**/*",
+    ".react-router/types/**/*"
+  ],
   "compilerOptions": {
-    "rootDir": "./",
+    "rootDirs": ["./", "./.react-router/types"],
     "outDir": "./build",
     "moduleResolution": "bundler",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["@react-router/node", "vite/client"],
     "module": "ESNext",
     "jsx": "preserve",
     "skipLibCheck": true,

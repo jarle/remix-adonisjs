@@ -1,14 +1,8 @@
-import { vitePlugin as remix } from '@remix-run/dev'
+import { reactRouter } from '@react-router/dev/vite'
 import { defineConfig } from 'vite'
 
 export default defineConfig(({ isSsrBuild }) => ({
-  plugins: [
-    remix({
-      appDirectory: 'resources/remix_app',
-      buildDirectory: 'build/remix',
-      serverBuildFile: 'server.js',
-    }),
-  ],
+  plugins: [reactRouter()],
   optimizeDeps: {
     esbuildOptions: isSsrBuild
       ? {

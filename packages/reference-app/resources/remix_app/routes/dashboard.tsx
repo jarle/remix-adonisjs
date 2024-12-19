@@ -1,10 +1,10 @@
-import { LoaderFunctionArgs, json } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
+import { useLoaderData } from 'react-router'
+import { Route } from './+types/dashboard.js'
 
-export const loader = ({ context }: LoaderFunctionArgs) => {
+export const loader = ({ context }: Route.LoaderArgs) => {
   const { http } = context
 
-  return json(http.session.all())
+  return http.session.all()
 }
 export default function Page() {
   const data = useLoaderData()

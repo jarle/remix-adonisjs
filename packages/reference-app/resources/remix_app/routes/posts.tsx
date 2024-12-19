@@ -1,15 +1,15 @@
-import { Await, defer, useLoaderData } from '@remix-run/react'
+import { Await, useLoaderData } from 'react-router'
 import { Suspense } from 'react'
 
 export const loader = async () => {
   // simulate a slow loader
-  return defer({
+  return {
     lazyPosts: new Promise<string[]>((resolve) => {
       setTimeout(() => {
         resolve(['Post 1', 'Post 2'])
       }, 100)
     }),
-  })
+  }
 }
 
 export default function Page() {

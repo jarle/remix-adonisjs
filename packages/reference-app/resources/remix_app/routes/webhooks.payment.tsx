@@ -1,10 +1,18 @@
-import { ActionFunctionArgs, json } from '@remix-run/node'
+import { Route } from './+types/webhooks.payment.js'
 
-export const action = async ({ request, context }: ActionFunctionArgs) => {
+export const action = async ({ request, context }: Route.ActionArgs) => {
   const body = await request.text()
   const { http } = context
   http.logger.info('webhook body', body)
-  return json({
+  return Response.json({
     status: 'ok',
   })
+}
+
+
+export function headers({ }: Route.HeadersArgs) {
+  return {
+    "X-Stretchy-Pants": "its for fun",
+    "Cache-Control": "max-age=300, s-maxage=3600",
+  };
 }

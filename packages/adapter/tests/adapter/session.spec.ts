@@ -1,5 +1,5 @@
 import { test } from '@japa/runner'
-import { redirect } from '@remix-run/node'
+import { redirect } from 'react-router'
 import setCookieParser from 'set-cookie-parser'
 import supertest from 'supertest'
 import { cookieClient, remixHandler } from './http_server.js'

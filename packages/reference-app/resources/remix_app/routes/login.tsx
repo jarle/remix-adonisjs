@@ -1,7 +1,7 @@
-import { ActionFunctionArgs, redirect } from '@remix-run/node'
-import { Form } from '@remix-run/react'
+import { Form, redirect } from 'react-router'
+import { Route } from './+types/login.js'
 
-export const action = async ({ context }: ActionFunctionArgs) => {
+export const action = async ({ context }: Route.ActionArgs) => {
   const { http } = context
 
   const { password } = http.request.only(['password'])
