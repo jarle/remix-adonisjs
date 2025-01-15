@@ -43,10 +43,10 @@
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
     "eslint": "^8.57.0",
-    "hot-hook": "^0.3.1",
+    "hot-hook": "^0.4.0",
     "prettier": "^3.4.2",
     "ts-node": "^10.9.2",
-    "typescript": "5.6.3",
+    "typescript": "5.7.3",
     "vite": "^5.4.11"
   },
   "dependencies": {
