@@ -1,45 +1,26 @@
 {{{
   exports({ to: app.makePath('resources/remix_app/routes/_index.tsx') })
 }}}
-import type { MetaFunction } from "@remix-run/node";
+import { useLoaderData } from "react-router";
+import type { Route } from "./+types/_index";
 
-export const meta: MetaFunction = () => {
+export function meta({ }: Route.MetaArgs) {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "New React Router App" },
+    { name: "description", content: "Welcome to React Router!" },
   ];
-};
+}
 
-export default function Index() {
-  return (
-    <div>
-      <h1>Welcome to Remix</h1>
-      <h2>...powered by AdonisJS 😎</h2>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
-  );
+
+export async function loader({ context }: Route.LoaderArgs) {
+  const service = await context.make('hello_service')
+
+  return {
+    message: service.getMessage(),
+  }
+}
+
+export default function Home() {
+  const { message } = useLoaderData<typeof loader>()
+  return <div>{message}</div>;
 }

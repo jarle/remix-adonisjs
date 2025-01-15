@@ -1,10 +1,9 @@
-import { json } from '@remix-run/node'
-import { Form, useActionData } from '@remix-run/react'
+import { Form, useActionData } from 'react-router'
 
 export const action = () => {
-  return json({
+  return {
     message: 'Thank you for your feedback!',
-  })
+  }
 }
 
 export default function Page() {

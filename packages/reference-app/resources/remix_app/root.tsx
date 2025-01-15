@@ -1,10 +1,4 @@
-import { cssBundleHref } from '@remix-run/css-bundle'
-import type { LinksFunction } from '@remix-run/node'
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react'
-
-export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
-]
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 
 export default function App() {
   return (
@@ -17,11 +11,7 @@ export default function App() {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
         />
-        <link
-          rel="icon"
-          type="image/png"
-          href='/favicon.png'
-        />
+        <link rel="icon" type="image/png" href="/favicon.png" />
         <Links />
       </head>
       <body>

@@ -1,7 +1,7 @@
 {
   "name": "@matstack/remix-adonisjs",
   "description": "An adapter for using Remix with AdonisJS",
-  "version": "0.0.35",
+  "version": "1.0.0-rr7.6",
   "engines": {
     "node": ">=20.10.0"
   },
@@ -81,12 +81,9 @@
     "vite": "^5.4.11"
   },
   "peerDependencies": {
-    "@adonisjs/core": "^6.7.0",
-    "@remix-run/css-bundle": "^2.2.0",
-    "@remix-run/dev": "^2.2.0",
-    "@remix-run/node": "^2.2.0",
-    "@remix-run/react": "^2.2.0",
+    "@react-router/node": "^7.0.0",
     "react": "^18.2.0",
+    "react-router": "^7.0.0",
     "react-dom": "^18.2.0"
   },
   "peerDependenciesMeta": {},

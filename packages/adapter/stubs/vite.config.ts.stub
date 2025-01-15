@@ -1,25 +1,18 @@
 {{{
   exports({ to: app.makePath("vite.config.ts") })
 }}}
-import adonisjs from '@adonisjs/vite/client'
-import { vitePlugin as remix } from '@remix-run/dev'
-import { defineConfig } from 'vite'
+import { reactRouter } from '@react-router/dev/vite';
+import { defineConfig } from 'vite';
 
-export default defineConfig({
-  base: '/assets/',
+export default defineConfig(({ isSsrBuild }) => ({
   plugins: [
-    remix({
-      appDirectory: 'resources/remix_app',
-      buildDirectory: 'build/remix',
-      serverBuildFile: 'server.js',
-    }),
-    adonisjs({
-      entrypoints: [],
-    }),
+    reactRouter(),
   ],
-  esbuildOptions: isSsrBuild
-    ? {
-        target: 'ES2022',
-      }
-    : {},
-})
+  optimizeDeps: {
+    esbuildOptions: isSsrBuild
+      ? {
+          target: 'ES2022',
+        }
+      : {},
+  },
+}))

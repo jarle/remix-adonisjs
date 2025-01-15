@@ -4,12 +4,14 @@ import type { Container } from '@adonisjs/core/container'
 import type { HttpContext } from '@adonisjs/core/http'
 import type { ContainerBindings } from '@adonisjs/core/types'
 import type { Request as AdonisRequest, Response as AdonisResponse } from '@adonisjs/http-server'
+
 import {
   AppLoadContext,
   ServerBuild,
-  createReadableStreamFromReadable,
   createRequestHandler as createRemixRequestHandler,
-} from '@remix-run/node'
+} from 'react-router'
+
+import { createReadableStreamFromReadable } from '@react-router/node'
 import debug from './debug.js'
 import { ReadableWebToNodeStream } from './stream_conversion.js'
 
@@ -18,7 +20,7 @@ export type HandlerContext = {
   container: Container<ContainerBindings>
 }
 
-export type LoaderContext = {
+export type AdonisApplicationContext = {
   http: HttpContext
   make: Container<ContainerBindings>['make']
 }

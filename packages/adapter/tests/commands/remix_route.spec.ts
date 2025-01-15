@@ -36,29 +36,27 @@ test.group('Create remix route from stub', (group) => {
     let flagRoutes: FlagRoute[] = [
       {
         flag: 'loader',
-        codeMatch: 'export const loader = ({ context }: LoaderFunctionArgs) => {',
+        codeMatch: 'export async function loader({ context }: Route.LoaderArgs) {',
       },
       {
         flag: 'client-loader',
-        codeMatch:
-          'export const clientLoader = async ({ request, params, serverLoader }: ClientLoaderFunctionArgs) => {',
+        codeMatch: 'export async function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {',
       },
       {
         flag: 'action',
-        codeMatch: 'export const action = ({ context }: ActionFunctionArgs) => {',
+        codeMatch: 'export async function action({ context }: Route.ActionArgs) {',
       },
       {
         flag: 'client-action',
-        codeMatch:
-          'export const clientAction = async ({ request, params, serverAction }: ClientActionFunctionArgs) => {',
+        codeMatch: 'export async function clientAction({ serverAction }: Route.ClientActionArgs) {',
       },
       {
         flag: 'meta',
-        codeMatch: 'export const meta: MetaFunction = () => {',
+        codeMatch: 'export function meta({ }: Route.MetaArgs) {',
       },
       {
         flag: 'headers',
-        codeMatch: 'export const headers: HeadersFunction = ({',
+        codeMatch: 'export function headers({ }: Route.HeadersArgs) {',
       },
 
       {

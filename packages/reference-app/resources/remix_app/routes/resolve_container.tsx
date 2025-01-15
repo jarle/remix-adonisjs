@@ -1,11 +1,11 @@
-import { LoaderFunctionArgs, json } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
+import { useLoaderData } from 'react-router'
+import { Route } from './+types/resolve_container.js'
 
-export const loader = async ({ context }: LoaderFunctionArgs) => {
+export const loader = async ({ context }: Route.LoaderArgs) => {
   const app = await context.make('app')
-  return json({
+  return {
     env: app.getEnvironment(),
-  })
+  }
 }
 
 export default function Page() {

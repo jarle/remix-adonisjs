@@ -1,11 +1,10 @@
-import { json } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
+import { useLoaderData } from 'react-router'
 
 export const loader = () => {
-  return json({
+  return {
     userName: 'John Doe',
     email: 'john.doe@example.com',
-  })
+  }
 }
 
 export default function Page() {

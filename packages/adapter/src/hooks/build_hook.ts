@@ -6,11 +6,11 @@ import path from 'node:path'
 
 /**
  *
- * The hook is responsible for launching the remix vite:build command when the application is built
+ * The hook is responsible for launching the react-router build command when the application is built
  */
 export default async function remixBuildHook({ logger }: Parameters<AssemblerHookHandler>[0]) {
-  logger.info('building remix app with vite')
-  await runCommand('npx remix vite:build')
+  logger.info('building React Router app with vite')
+  await runCommand('npx react-router build')
   const config = await resolveViteConfig()
   // const cli = await import('@remix-run/dev')
   // await cli.run(['vite:build'])
