@@ -58,7 +58,7 @@
     "@adonisjs/session": "^7.5.0",
     "@adonisjs/tsconfig": "^1.4.0",
     "@adonisjs/vite": "^4.0.0",
-    "@japa/assert": "^3.0.0",
+    "@japa/assert": "^4.0.1",
     "@japa/expect": "^3.0.2",
     "@japa/runner": "^3.1.4",
     "@swc/core": "^1.9.2",
