@@ -1,18 +1,14 @@
 import { reactRouter } from '@react-router/dev/vite'
+import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
-import tailwindcss from 'tailwindcss'
-import autoprefixer from 'autoprefixer'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig(({ isSsrBuild }) => ({
   base: '/assets/',
   plugins: [
-    reactRouter({
-      appDirectory: 'resources/remix_app',
-      buildDirectory: 'build/remix',
-      serverBuildFile: 'server.js',
-    }),
+    reactRouter(),
     tsconfigPaths(),
+    tailwindcss(),
   ],
   optimizeDeps: {
     esbuildOptions: isSsrBuild
@@ -20,10 +16,5 @@ export default defineConfig(({ isSsrBuild }) => ({
           target: 'ES2022',
         }
       : {},
-  },
-  css: {
-    postcss: {
-      plugins: [tailwindcss(), autoprefixer()],
-    },
   },
 }))

@@ -1,5 +1,4 @@
-import { json, type LoaderFunctionArgs, type MetaFunction } from 'react-router'
-import { useLoaderData } from 'react-router'
+import { useLoaderData, type LoaderFunctionArgs, type MetaFunction } from 'react-router'
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover'
 
 export const meta: MetaFunction = () => {
@@ -8,7 +7,7 @@ export const meta: MetaFunction = () => {
 
 export const loader = async ({ context }: LoaderFunctionArgs) => {
   const service = await context.make('hello_service')
-  return json({ message: service.getMessage() })
+  return { message: service.getMessage() }
 }
 
 export default function Index() {

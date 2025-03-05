@@ -1,2 +1,5 @@
-/// <reference types="vite/client" />
-/// <reference types="@remix-run/node" />
+import type { AdonisApplicationContext } from '@matstack/remix-adonisjs/types';
+
+declare module 'react-router' {
+  interface AppLoadContext extends AdonisApplicationContext { }
+}
