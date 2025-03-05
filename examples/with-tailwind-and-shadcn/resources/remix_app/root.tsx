@@ -1,5 +1,4 @@
-import { ActionFunctionArgs, LoaderFunctionArgs, json } from 'react-router'
-import { Form, Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from 'react-router'
+import { ActionFunctionArgs, Form, Links, LoaderFunctionArgs, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from 'react-router'
 import { cn } from './lib/utils'
 
 import vine from '@vinejs/vine'
@@ -8,7 +7,7 @@ import '~/styles/tailwind.css'
 export async function loader({ context }: LoaderFunctionArgs) {
   const { http } = context
   const prefersDarkMode = http.session.get('prefersDarkMode') || false
-  return json({ prefersDarkMode })
+  return { prefersDarkMode }
 }
 
 // See the docs for more complex intent validation:
