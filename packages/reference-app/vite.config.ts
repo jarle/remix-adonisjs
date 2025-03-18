@@ -1,13 +1,13 @@
 import { reactRouter } from '@react-router/dev/vite'
 import { defineConfig } from 'vite'
 
-export default defineConfig(({ isSsrBuild }) => ({
+export default defineConfig({
   plugins: [reactRouter()],
-  optimizeDeps: {
-    esbuildOptions: isSsrBuild
-      ? {
-          target: 'ES2022',
-        }
-      : {},
+  server: {
+    warmup: {
+      clientFiles: [
+        './resources/remix_app/**/*.tsx',
+      ],
+    },
   },
-}))
+})
