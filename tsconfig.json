@@ -1,5 +1,10 @@
 {
   "extends": "@adonisjs/tsconfig/tsconfig.package.json",
+  "files": [],
+  "references": [
+    { "path": "packages/adapter" },
+    { "path": "packages/reference-app" }
+  ],
   "compilerOptions": {
     "incremental": true,
     "composite": true

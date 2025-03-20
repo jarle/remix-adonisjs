@@ -1,4 +1,4 @@
-import { Route } from "./+types/adonis_redirect.js"
+import type { Route } from "./+types/adonis_redirect.js"
 
 export const loader = async ({ context }: Route.LoaderArgs) => {
   const { http } = context

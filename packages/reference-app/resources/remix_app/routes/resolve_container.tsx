@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router'
-import { Route } from './+types/resolve_container.js'
+import type { Route } from './+types/resolve_container.js'
 
 export const loader = async ({ context }: Route.LoaderArgs) => {
   const app = await context.make('app')

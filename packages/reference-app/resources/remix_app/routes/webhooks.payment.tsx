@@ -1,4 +1,4 @@
-import { Route } from './+types/webhooks.payment.js'
+import type { Route } from './+types/webhooks.payment.js'
 
 export const action = async ({ request, context }: Route.ActionArgs) => {
   const body = await request.text()

@@ -1,5 +1,5 @@
 import { Form, redirect } from 'react-router'
-import { Route } from './+types/login.js'
+import type { Route } from './+types/login.js'
 
 export const action = async ({ context }: Route.ActionArgs) => {
   const { http } = context
