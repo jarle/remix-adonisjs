@@ -6,6 +6,10 @@ on:
   schedule:
     - cron: "0 16 * * *"
 
+concurrency:
+  group: workflow-example-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   linux:
     runs-on: ubuntu-latest
