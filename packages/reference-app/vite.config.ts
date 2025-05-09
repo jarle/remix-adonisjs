@@ -10,4 +10,8 @@ export default defineConfig({
       ],
     },
   },
+  ssr: {
+    // Avoid bundling adapter code
+    external: ['@matstack/remix-adonisjs']
+  }
 })

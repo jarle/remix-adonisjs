@@ -7,15 +7,17 @@ import type { Request as AdonisRequest, Response as AdonisResponse } from '@adon
 
 import {
   AppLoadContext,
+  UNSAFE_MiddlewareEnabled as MiddlewareEnabled,
   ServerBuild,
   createRequestHandler as createRemixRequestHandler,
+  unstable_InitialContext,
 } from 'react-router'
 
 import { createReadableStreamFromReadable } from '@react-router/node'
 import debug from './debug.js'
 import { ReadableWebToNodeStream } from './stream_conversion.js'
 
-export type HandlerContext = {
+export type AdonisAdapterContext = {
   http: HttpContext
   container: Container<ContainerBindings>
 }
@@ -25,9 +27,15 @@ export type AdonisApplicationContext = {
   make: Container<ContainerBindings>['make']
 }
 
-export type GetLoadContextFunction = (context: HandlerContext) => AppLoadContext
+export type MaybePromise<T> = T | Promise<T>
 
-export type RequestHandler = (context: HandlerContext) => Promise<void>
+export type GetLoadContextFunction = (
+  context: AdonisAdapterContext
+) => MiddlewareEnabled extends true
+  ? MaybePromise<unstable_InitialContext>
+  : MaybePromise<AppLoadContext>
+
+export type RequestHandler = (context: AdonisAdapterContext) => Promise<void>
 
 /**
  * Returns a request handler for AdonisJS that serves the response using Remix.
@@ -37,20 +45,20 @@ export function createRequestHandler({
   getLoadContext,
   mode = process.env.NODE_ENV,
 }: {
-  build: ServerBuild
-  getLoadContext: GetLoadContextFunction
+  build: ServerBuild | (() => Promise<ServerBuild>)
+  getLoadContext?: GetLoadContextFunction
   mode?: string
 }): RequestHandler {
   let handleRequest = createRemixRequestHandler(build, mode)
 
-  return async (context: HandlerContext) => {
+  return async (context: AdonisAdapterContext) => {
     debug(`Creating remix request for ${context.http.request.parsedUrl}`)
     const request = createRemixRequest(context.http.request, context.http.response)
-    const loadContext = getLoadContext(context)
+    const loadContext = await getLoadContext?.(context)
 
     const response = await handleRequest(request, loadContext)
 
-    sendRemixResponse(context.http, response)
+    await sendRemixResponse(context.http, response)
   }
 }
 

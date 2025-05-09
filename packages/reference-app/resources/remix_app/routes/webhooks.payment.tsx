@@ -1,8 +1,9 @@
+import { adonisContext } from '@matstack/remix-adonisjs'
 import type { Route } from './+types/webhooks.payment.js'
 
 export const action = async ({ request, context }: Route.ActionArgs) => {
   const body = await request.text()
-  const { http } = context
+  const { http } = context.get(adonisContext)
   http.logger.info('webhook body', body)
   return Response.json({
     status: 'ok',
