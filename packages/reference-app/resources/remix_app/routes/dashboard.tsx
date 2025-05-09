@@ -1,8 +1,9 @@
+import { adonisContext } from '@matstack/remix-adonisjs'
 import { useLoaderData } from 'react-router'
 import type { Route } from './+types/dashboard.js'
 
 export const loader = ({ context }: Route.LoaderArgs) => {
-  const { http, make } = context
+  const { http } = context.get(adonisContext)
 
   return http.session.all()
 }

@@ -1,7 +1,8 @@
+import { adonisContext } from "@matstack/remix-adonisjs"
 import type { Route } from "./+types/adonis_redirect.js"
 
 export const loader = async ({ context }: Route.LoaderArgs) => {
-  const { http } = context
+  const { http } = context.get(adonisContext)
 
   http.response.redirect('/login')
 

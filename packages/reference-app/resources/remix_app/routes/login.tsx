@@ -1,8 +1,9 @@
+import { adonisContext } from '@matstack/remix-adonisjs'
 import { Form, redirect } from 'react-router'
 import type { Route } from './+types/login.js'
 
 export const action = async ({ context }: Route.ActionArgs) => {
-  const { http } = context
+  const { http } = context.get(adonisContext)
 
   const { password } = http.request.only(['password'])
   if (password !== '123') {

@@ -4,6 +4,7 @@ import type { RequestHandler } from '../src/remix_adapter.js'
 
 import { HttpContext } from '@adonisjs/core/http'
 import type { ApplicationService } from '@adonisjs/core/types'
+import { adonisContext } from '../src/context.js'
 import '../src/types/main.js'
 
 declare module '@adonisjs/core/types' {
@@ -42,10 +43,14 @@ export default class RemixProvider {
 
     const requestHandler = createRequestHandler({
       build,
-      getLoadContext: (context) => ({
-        http: context.http,
-        make: context.container.make.bind(context.container),
-      }),
+      getLoadContext: ({ container, http }) => {
+        const map = new Map()
+        map.set(adonisContext, {
+          http,
+          make: container.make.bind(container),
+        })
+        return map as any // TODO: don't use any here
+      },
     })
     const app = this.app
     HttpContext.getter(
