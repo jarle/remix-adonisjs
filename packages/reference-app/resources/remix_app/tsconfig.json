@@ -1,10 +1,10 @@
 {
   "extends": "@adonisjs/tsconfig/tsconfig.app.json",
   "include": [
-    "**/*",
+    "../../**/*",
     "resources/remix_app/**/.server/**/*",
     "resources/remix_app/**/.client/**/*",
-    ".react-router/types/**/*",
+    "../../.react-router/types/**/*",
   ],
   "compilerOptions": {
     "lib": [
@@ -21,13 +21,13 @@
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "rootDirs": [
-      "resources/remix_app",
-      ".react-router/types/resources/remix_app"
+      ".",
+      "../../.react-router/types/resources/remix_app"
     ],
     "baseUrl": ".",
     "paths": {
       "~/*": [
-        "./resources/remix_app/*"
+        "./*"
       ]
     },
     "esModuleInterop": true,
