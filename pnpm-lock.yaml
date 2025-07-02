@@ -80,6 +80,9 @@ importers:
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
+      get-port:
+        specifier: ^7.1.0
+        version: 7.1.0
       node-mocks-http:
         specifier: ^1.16.1
         version: 1.17.2(@types/node@22.16.0)

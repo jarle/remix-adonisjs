@@ -3,8 +3,6 @@
   "private": true,
   "scripts": {
     "dev": "pnpm --filter reference-app run dev",
-    "build": "pnpm --filter @matstack/remix-adonisjs run build && pnpm --filter reference-app run build",
-    "test": "pnpm --filter @matstack/remix-adonisjs run test && pnpm --filter reference-app run test",
     "release": "pnpm --filter @matstack/remix-adonisjs run release"
   }
 }
