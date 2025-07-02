@@ -65,7 +65,7 @@
     "@adonisjs/vite": "^4.0.0",
     "@japa/api-client": "^2.0.4",
     "@japa/browser-client": "^2.1.1",
-    "@matstack/remix-adonisjs": "*",
+    "@matstack/remix-adonisjs": "workspace:*",
     "@react-router/node": "^7.6.0",
     "@react-router/serve": "^7.6.0",
     "@vinejs/vine": "^3.0.0",

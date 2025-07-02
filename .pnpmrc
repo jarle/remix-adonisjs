@@ -1,0 +1,15 @@
+# Hoisting configuration
+shamefully-hoist=false
+strict-peer-dependencies=false
+
+# Performance settings
+store-dir=.pnpm-store
+side-effects-cache=true
+side-effects-cache-readonly=true
+
+# Workspace settings
+prefer-workspace-packages=true
+save-workspace-protocol=rolling
+
+# Registry configuration
+registry=https://registry.npmjs.org/
