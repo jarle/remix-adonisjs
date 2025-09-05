@@ -1,5 +1,7 @@
 # remix-adonisjs
 
+Sponsored by [SummYT.app](https://summyt.app)
+
 **remix-adonisjs** includes all the amazing features you love from Remix, plus support for production-grade:
 
 - Database ORM and migrations
