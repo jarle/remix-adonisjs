@@ -1,12 +1,13 @@
 {
   "extends": "@adonisjs/tsconfig/tsconfig.app.json",
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.remix.json"
-    },
-    {
-      "path": "./tsconfig.adonis.json"
-    }
-  ]
+  "include": [
+    "**/*"
+  ],
+  "exclude": [
+    "resources/remix_app/**"
+  ],
+  "compilerOptions": {
+    "rootDir": "./",
+    "outDir": "./build"
+  }
 }

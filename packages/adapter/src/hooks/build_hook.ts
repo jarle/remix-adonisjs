@@ -1,5 +1,6 @@
 import app from '@adonisjs/core/services/app'
 import type { AssemblerHookHandler } from '@adonisjs/core/types/app'
+import { execa } from 'execa'
 import { spawn } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -10,7 +11,10 @@ import path from 'node:path'
  */
 export default async function remixBuildHook({ logger }: Parameters<AssemblerHookHandler>[0]) {
   logger.info('building React Router app with vite')
-  await runCommand('npx react-router build')
+  await execa('react-router', ['build'], {
+    preferLocal: true,   // use ./node_modules/.bin/react-router
+    stdio: 'inherit',
+  })
   const config = await resolveViteConfig()
   // const cli = await import('@remix-run/dev')
   // await cli.run(['vite:build'])
