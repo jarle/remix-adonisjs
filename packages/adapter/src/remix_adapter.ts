@@ -11,9 +11,9 @@ import {
   createRequestHandler as createRemixRequestHandler,
 } from 'react-router'
 
+import { Readable } from 'node:stream'
 import { createReadableStreamFromReadable } from '@react-router/node'
 import debug from './debug.js'
-import { ReadableWebToNodeStream } from './stream_conversion.js'
 
 export type HandlerContext = {
   http: HttpContext
@@ -110,10 +110,10 @@ export async function sendRemixResponse(ctx: HttpContext, webResponse: Response)
   }
 
   debug('Commit session early for remix response')
-  ctx.session?.commit()
+  await ctx.session?.commit()
   webResponse.headers.forEach((value, key) => res.append(key, value))
 
   if (webResponse.body) {
-    res.stream(new ReadableWebToNodeStream(webResponse.body))
+    res.stream(Readable.fromWeb(webResponse.body))
   }
 }
