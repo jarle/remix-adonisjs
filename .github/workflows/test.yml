@@ -22,11 +22,24 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - name: Install
-        run: npm install
-      - name: Install playwright
-        run: npx playwright install --with-deps
+        run: pnpm install
+      - name: Install playwright browsers
+        run: pnpm --filter packages/reference-app exec playwright install --with-deps
       - name: Build
-        run: npm run build
+        run: pnpm run build
       - name: Run tests
-        run: npm test
+        run: pnpm test
