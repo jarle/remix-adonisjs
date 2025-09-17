@@ -37,8 +37,8 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install
         run: pnpm install
-      - name: Install playwright
-        run: pnpm exec playwright install --with-deps
+      - name: Install playwright browsers
+        run: pnpm --filter packages/reference-app exec playwright install --with-deps
       - name: Build
         run: pnpm run build
       - name: Run tests
