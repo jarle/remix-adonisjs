@@ -9,8 +9,8 @@ import { SessionMiddlewareFactory } from '@adonisjs/session/factories'
 import { SessionConfig } from '@adonisjs/session/types'
 import { getActiveTest } from '@japa/runner'
 import getPort from 'get-port'
-import { IncomingMessage, Server, ServerResponse, createServer } from 'node:http'
-import { RequestHandler } from 'react-router'
+import { createServer, IncomingMessage, Server, ServerResponse } from 'node:http'
+import { RequestHandler, RouterContextProvider } from 'react-router'
 import debug from '../../src/debug.js'
 import { createRemixRequest, sendRemixResponse } from '../../src/remix_adapter.js'
 import { CookieStore } from './cookie.js'
@@ -69,10 +69,13 @@ export const remixHandler = (requestHandler: RequestHandler): Server =>
       const remixRequest = createRemixRequest(request, response)
 
       debug('Creating request handler')
-      const foo = await requestHandler(remixRequest, {
+
+      const context = new RouterContextProvider()
+      Object.assign(context, {
         http: ctx,
         make: ctx.containerResolver.make,
       })
+      const foo = await requestHandler(remixRequest, context)
 
       ctx.session.commit()
 

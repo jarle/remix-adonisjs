@@ -6,13 +6,13 @@ import type { ContainerBindings } from '@adonisjs/core/types'
 import type { Request as AdonisRequest, Response as AdonisResponse } from '@adonisjs/http-server'
 
 import {
-  AppLoadContext,
+  RouterContextProvider,
   ServerBuild,
   createRequestHandler as createRemixRequestHandler,
 } from 'react-router'
 
-import { Readable } from 'node:stream'
 import { createReadableStreamFromReadable } from '@react-router/node'
+import { Readable } from 'node:stream'
 import debug from './debug.js'
 
 export type HandlerContext = {
@@ -25,7 +25,7 @@ export type AdonisApplicationContext = {
   make: Container<ContainerBindings>['make']
 }
 
-export type GetLoadContextFunction = (context: HandlerContext) => AppLoadContext
+export type GetLoadContextFunction = (context: HandlerContext) => RouterContextProvider
 
 export type RequestHandler = (context: HandlerContext) => Promise<void>
 
@@ -50,7 +50,7 @@ export function createRequestHandler({
 
     const response = await handleRequest(request, loadContext)
 
-    sendRemixResponse(context.http, response)
+    await sendRemixResponse(context.http, response)
   }
 }
 

@@ -4,6 +4,7 @@ import type { RequestHandler } from '../src/remix_adapter.js'
 
 import { HttpContext } from '@adonisjs/core/http'
 import type { ApplicationService } from '@adonisjs/core/types'
+import { RouterContextProvider } from 'react-router'
 import '../src/types/main.js'
 
 declare module '@adonisjs/core/types' {
@@ -42,10 +43,14 @@ export default class RemixProvider {
 
     const requestHandler = createRequestHandler({
       build,
-      getLoadContext: (context) => ({
-        http: context.http,
-        make: context.container.make.bind(context.container),
-      }),
+      getLoadContext: (context) => {
+        const ctx = new RouterContextProvider()
+        Object.assign(ctx, {
+          http: context.http,
+          make: context.container.make.bind(context.container),
+        })
+        return ctx
+      },
     })
     const app = this.app
     HttpContext.getter(
