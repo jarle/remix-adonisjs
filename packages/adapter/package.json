@@ -40,11 +40,9 @@
     "lint": "eslint . --ext=.ts",
     "postcompile": "pnpm run copy:templates && pnpm run copy:readme && pnpm run index:commands",
     "prepublishOnly": "pnpm run lint && pnpm run build",
-    "quick:test": "node --enable-source-maps --loader=ts-node/esm bin/test.ts",
     "release": "pnpm version patch --force && pnpm publish",
     "test": "cross-env NODE_DEBUG=adonisjs:*,matstack:* NODE_ENV=test node --loader ts-node/esm --enable-source-maps bin/test.ts",
     "typecheck": "tsc --noEmit",
-    "version": "pnpm run build",
     "index:commands": "adonis-kit index build/commands"
   },
   "dependencies": {

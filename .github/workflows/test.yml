@@ -38,7 +38,7 @@ jobs:
       - name: Install
         run: pnpm install
       - name: Install playwright browsers
-        run: pnpm --filter packages/reference-app exec playwright install --with-deps
+        run: pnpm --filter reference-app exec playwright install --with-deps
       - name: Build
         run: pnpm run build
       - name: Run tests
