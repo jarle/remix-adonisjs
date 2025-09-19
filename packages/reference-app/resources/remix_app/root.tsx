@@ -1,4 +1,10 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
+import { Route } from './+types/root.js'
+import { loggingMiddleware } from './middleware/logging.js'
+
+export const middleware: Route.MiddlewareFunction[] = [
+  loggingMiddleware
+]
 
 export default function App() {
   return (

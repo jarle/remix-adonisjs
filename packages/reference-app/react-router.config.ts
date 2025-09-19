@@ -4,4 +4,7 @@ export default {
   appDirectory: 'resources/remix_app',
   buildDirectory: 'build/remix',
   serverBuildFile: 'server.js',
+  future: {
+    v8_middleware: true,
+  }
 } satisfies Config
