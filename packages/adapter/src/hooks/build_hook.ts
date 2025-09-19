@@ -12,7 +12,7 @@ export default async function remixBuildHook({ logger }: Parameters<AssemblerHoo
   logger.info('building React Router app with vite')
   await execa('react-router', ['build'], {
     preferLocal: true, // use ./node_modules/.bin/react-router
-    stdio: 'inherit'
+    stdio: 'inherit',
   })
   const config = await resolveViteConfig()
   // const cli = await import('@remix-run/dev')
