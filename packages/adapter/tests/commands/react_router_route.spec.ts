@@ -9,7 +9,7 @@ test.group('Create react-router route from stub', (group) => {
   })
 
   test('make a basic route', async ({ fs, assert }) => {
-    const ace = await new AceFactory().make(fs.baseUrl, { importer: () => { } })
+    const ace = await new AceFactory().make(fs.baseUrl, { importer: () => {} })
     await ace.app.init()
     ace.ui.switchMode('raw')
 
@@ -24,7 +24,7 @@ test.group('Create react-router route from stub', (group) => {
   })
 
   test('Test flags', async ({ fs, assert }) => {
-    const ace = await new AceFactory().make(fs.baseUrl, { importer: () => { } })
+    const ace = await new AceFactory().make(fs.baseUrl, { importer: () => {} })
     await ace.app.init()
     ace.ui.switchMode('raw')
 

@@ -37,7 +37,7 @@ test.group('createRemixRequest Adapter Tests', () => {
       })
 
       // Handle the request to ensure it's fully established before closing the response
-      req.on('data', () => { }) // Necessary to consume the request stream
+      req.on('data', () => {}) // Necessary to consume the request stream
       req.on('end', () => {
         // Close the response after the request is fully received
         res.destroy()
