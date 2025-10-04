@@ -9,8 +9,8 @@ import { SessionMiddlewareFactory } from '@adonisjs/session/factories'
 import { SessionConfig } from '@adonisjs/session/types'
 import { getActiveTest } from '@japa/runner'
 import getPort from 'get-port'
-import { IncomingMessage, Server, ServerResponse, createServer } from 'node:http'
-import { RequestHandler } from 'react-router'
+import { createServer, IncomingMessage, Server, ServerResponse } from 'node:http'
+import { RequestHandler, RouterContextProvider } from 'react-router'
 import debug from '../../src/debug.js'
 import {
   createReactRouterRequest,
@@ -72,15 +72,18 @@ export const reactRouterHandler = (requestHandler: RequestHandler): Server =>
       const reactRouterRequest = createReactRouterRequest(request, response)
 
       debug('Creating request handler')
-      const foo = await requestHandler(reactRouterRequest, {
+
+      const context = new RouterContextProvider()
+      Object.assign(context, {
         http: ctx,
         make: ctx.containerResolver.make,
       })
+      const reactRouterResponse = await requestHandler(reactRouterRequest, context)
 
       ctx.session.commit()
 
       debug('Sending react-router response')
-      await sendReactRouterResponse(ctx, foo)
+      await sendReactRouterResponse(ctx, reactRouterResponse)
     })
 
     debug('Finishing request')

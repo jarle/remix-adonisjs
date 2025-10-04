@@ -6,7 +6,7 @@ import type { ContainerBindings } from '@adonisjs/core/types'
 import type { Request as AdonisRequest, Response as AdonisResponse } from '@adonisjs/http-server'
 
 import {
-  AppLoadContext,
+  RouterContextProvider,
   ServerBuild,
   createRequestHandler as createReactRouterRequestHandler,
 } from 'react-router'
@@ -25,7 +25,7 @@ export type AdonisApplicationContext = {
   make: Container<ContainerBindings>['make']
 }
 
-export type GetLoadContextFunction = (context: HandlerContext) => AppLoadContext
+export type GetLoadContextFunction = (context: HandlerContext) => RouterContextProvider
 
 export type RequestHandler = (context: HandlerContext) => Promise<void>
 
