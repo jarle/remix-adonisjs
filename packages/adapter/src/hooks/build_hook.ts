@@ -1,7 +1,6 @@
 import app from '@adonisjs/core/services/app'
 import type { AssemblerHookHandler } from '@adonisjs/core/types/app'
 import { execa } from 'execa'
-import { spawn } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 
@@ -12,7 +11,7 @@ import path from 'node:path'
 export default async function remixBuildHook({ logger }: Parameters<AssemblerHookHandler>[0]) {
   logger.info('building React Router app with vite')
   await execa('react-router', ['build'], {
-    preferLocal: true,   // use ./node_modules/.bin/react-router
+    preferLocal: true, // use ./node_modules/.bin/react-router
     stdio: 'inherit',
   })
   const config = await resolveViteConfig()
@@ -39,30 +38,6 @@ function moveDirectorySync(source: string, target: string) {
       fs.renameSync(sourcePath, targetPath)
     }
   }
-}
-
-async function runCommand(command: string, args = []) {
-  return new Promise((resolve, reject) => {
-    const subprocess = spawn(command, args, { shell: true })
-    let stdout = ''
-    let stderr = ''
-
-    subprocess.stdout.on('data', (data) => {
-      stdout += data.toString()
-    })
-
-    subprocess.stderr.on('data', (data) => {
-      stderr += data.toString()
-    })
-
-    subprocess.on('close', (code) => {
-      if (code === 0) {
-        resolve(stdout)
-      } else {
-        reject(new Error(`Command failed with code ${code}: ${stderr}`))
-      }
-    })
-  })
 }
 
 export async function resolveViteConfig() {
