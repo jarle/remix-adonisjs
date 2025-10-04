@@ -2,25 +2,28 @@ import { RequestFactory, ResponseFactory } from '@adonisjs/core/factories/http'
 import { test } from '@japa/runner'
 import { RequestOptions, ResponseOptions, createRequest, createResponse } from 'node-mocks-http'
 import { IncomingMessage, ServerResponse } from 'node:http'
-import { createRemixHeaders, createRemixRequest } from '../../src/remix_adapter.js'
+import {
+  createReactRouterHeaders,
+  createReactRouterRequest,
+} from '../../src/react_router_adapter.js'
 
-test.group('createRemixHeaders', () => {
+test.group('createReactRouterHeaders', () => {
   test('handles empty headers', ({ expect }) => {
-    const headers = createRemixHeaders({})
+    const headers = createReactRouterHeaders({})
     expect(headers instanceof Headers).toBe(true)
     expect(Object.fromEntries(headers.entries())).toMatchObject({})
   })
 
   test('handles simple headers', ({ expect }) => {
     const expressHeaders = { 'x-foo': 'bar' }
-    const headers = createRemixHeaders(expressHeaders)
+    const headers = createReactRouterHeaders(expressHeaders)
 
     expect(headers.get('x-foo')).toBe('bar')
   })
 
   test('handles multiple headers', ({ expect }) => {
     const expressHeaders = { 'x-foo': 'bar', 'x-bar': 'baz' }
-    const headers = createRemixHeaders(expressHeaders)
+    const headers = createReactRouterHeaders(expressHeaders)
 
     expect(headers.get('x-foo')).toBe('bar')
     expect(headers.get('x-bar')).toBe('baz')
@@ -31,7 +34,7 @@ test.group('createRemixHeaders', () => {
       'x-foo': ['bar', 'baz'],
       'x-bar': 'baz',
     }
-    const headers = createRemixHeaders(expressHeaders)
+    const headers = createReactRouterHeaders(expressHeaders)
 
     expect(headers.get('x-foo')).toEqual('bar, baz')
     expect(headers.get('x-bar')).toBe('baz')
@@ -44,7 +47,7 @@ test.group('createRemixHeaders', () => {
         '__other=some_other_value; Path=/; Secure; HttpOnly; Expires=Wed, 21 Oct 2015 07:28:00 GMT; SameSite=Lax',
       ],
     }
-    const headers = createRemixHeaders(expressHeaders)
+    const headers = createReactRouterHeaders(expressHeaders)
 
     expect(headers.get('set-cookie')).toEqual(
       '__session=some_value; Path=/; Secure; HttpOnly; MaxAge=7200; SameSite=Lax, __other=some_other_value; Path=/; Secure; HttpOnly; Expires=Wed, 21 Oct 2015 07:28:00 GMT; SameSite=Lax'
@@ -52,7 +55,7 @@ test.group('createRemixHeaders', () => {
   })
 })
 
-test.group('Remix Adapter Tests', () => {
+test.group('React Router Adapter Tests', () => {
   test('creates a request with the correct headers', async ({ assert }) => {
     const request = testRequest({
       url: '/foo/bar',
@@ -66,11 +69,11 @@ test.group('Remix Adapter Tests', () => {
     })
 
     const response = testResponse()
-    const remixRequest = createRemixRequest(request, response)
+    const reactRouterRequest = createReactRouterRequest(request, response)
 
-    assert.equal(remixRequest.method, 'GET')
-    assert.equal(remixRequest.headers.get('cache-control'), 'max-age=300, s-maxage=3600')
-    assert.equal(remixRequest.headers.get('host'), 'localhost:3000')
+    assert.equal(reactRouterRequest.method, 'GET')
+    assert.equal(reactRouterRequest.headers.get('cache-control'), 'max-age=300, s-maxage=3600')
+    assert.equal(reactRouterRequest.headers.get('host'), 'localhost:3000')
   })
 })
 

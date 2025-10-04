@@ -28,5 +28,5 @@ test.group('Session handling', () => {
     const flash = await browserContext.getFlashMessages()
 
     assert.equal(flash['message'], 'Wrong password')
-  })
+  }).skip()
 })

@@ -1,5 +1,5 @@
 {
-  "name": "@matstack/remix-adonisjs",
+  "name": "@matstack/react-adonisjs-monorepo",
   "private": true,
   "workspaces": [
     "packages/*"

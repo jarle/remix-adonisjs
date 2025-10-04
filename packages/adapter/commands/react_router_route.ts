@@ -1,12 +1,9 @@
 import { BaseCommand, args, flags } from '@adonisjs/core/ace'
 import { stubsRoot } from '../index.js'
 
-/**
- * Create a remix route
- */
-export default class MakeRemixRoute extends BaseCommand {
-  static commandName = 'remix:route'
-  static description = 'Create a Remix route'
+export default class MakeReactRouterRoute extends BaseCommand {
+  static commandName = 'react:route'
+  static description = 'Create a React Router route module'
 
   @args.string({ description: 'The name of the route, without prefix' })
   declare name: string

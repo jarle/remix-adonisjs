@@ -4,7 +4,7 @@
     "**/*"
   ],
   "exclude": [
-    "resources/remix_app/**"
+    "resources/react_app/**"
   ],
   "compilerOptions": {
     "rootDir": "./",

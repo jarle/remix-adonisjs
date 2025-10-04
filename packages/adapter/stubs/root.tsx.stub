@@ -1,5 +1,5 @@
 {{{
-  exports({ to: app.makePath('resources/remix_app/root.tsx') })
+  exports({ to: app.makePath('resources/react_router_app/root.tsx') })
 }}}
 import {
   isRouteErrorResponse,

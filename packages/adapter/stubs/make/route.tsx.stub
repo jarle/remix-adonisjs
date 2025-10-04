@@ -3,7 +3,7 @@
 
 {{{
   exports({
-    to: app.makePath('resources/remix_app/routes', routeFileName)
+    to: app.makePath('resources/react_router_app/routes', routeFileName)
   })
 }}}
 {{#if imports.router}}

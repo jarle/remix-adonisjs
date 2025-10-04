@@ -66,7 +66,7 @@
     "@adonisjs/vite": "^4.0.0",
     "@japa/api-client": "^2.0.4",
     "@japa/browser-client": "^2.1.1",
-    "@matstack/remix-adonisjs": "workspace:*",
+    "@matstack/react-adonisjs": "workspace:*",
     "@react-router/node": "^7.9.1",
     "@react-router/serve": "^7.9.1",
     "@vinejs/vine": "^3.0.0",
@@ -91,7 +91,7 @@
     ],
     "ignore": [
       "node_modules/**",
-      "resources/remix_app/**",
+      "resources/react_router_app/**",
       "vite.config.ts.timestamp*"
     ]
   }

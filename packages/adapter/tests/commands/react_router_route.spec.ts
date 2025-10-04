@@ -1,9 +1,9 @@
 import { AceFactory } from '@adonisjs/core/factories'
 import { test } from '@japa/runner'
 
-import MakeRemixRoute from '../../commands/remix_route.js'
+import MakeReactRouterRoute from '../../commands/react_router_route.js'
 
-test.group('Create remix route from stub', (group) => {
+test.group('Create react-router route from stub', (group) => {
   group.each.teardown(async () => {
     delete process.env.ADONIS_ACE_CWD
   })
@@ -13,12 +13,12 @@ test.group('Create remix route from stub', (group) => {
     await ace.app.init()
     ace.ui.switchMode('raw')
 
-    const command = await ace.create(MakeRemixRoute, ['login'])
+    const command = await ace.create(MakeReactRouterRoute, ['login'])
     await command.exec()
 
-    command.assertLog('green(DONE:)    create resources/remix_app/routes/login.tsx')
+    command.assertLog('green(DONE:)    create resources/react_router_app/routes/login.tsx')
     await assert.fileContains(
-      'resources/remix_app/routes/login.tsx',
+      'resources/react_router_app/routes/login.tsx',
       'export default function Page() {'
     )
   })
@@ -68,21 +68,27 @@ test.group('Create remix route from stub', (group) => {
     // positive test
     flagRoutes.forEach(async (route) => {
       const routeName = `positive-${route.flag}`
-      const command = await ace.create(MakeRemixRoute, [routeName, `--${route.flag}`])
+      const command = await ace.create(MakeReactRouterRoute, [routeName, `--${route.flag}`])
       await command.exec()
 
-      command.assertLog(`green(DONE:)    create resources/remix_app/routes/${routeName}.tsx`)
-      await assert.fileContains(`resources/remix_app/routes/${routeName}.tsx`, route.codeMatch)
+      command.assertLog(`green(DONE:)    create resources/react_router_app/routes/${routeName}.tsx`)
+      await assert.fileContains(
+        `resources/react_router_app/routes/${routeName}.tsx`,
+        route.codeMatch
+      )
     })
 
     // negative test
     flagRoutes.forEach(async (route) => {
       const routeName = `negative-${route.flag}`
-      const command = await ace.create(MakeRemixRoute, [routeName, `--${route.flag}=false`])
+      const command = await ace.create(MakeReactRouterRoute, [routeName, `--${route.flag}=false`])
       await command.exec()
 
-      command.assertLog(`green(DONE:)    create resources/remix_app/routes/${routeName}.tsx`)
-      await assert.fileNotContains(`resources/remix_app/routes/${routeName}.tsx`, route.codeMatch)
+      command.assertLog(`green(DONE:)    create resources/react_router_app/routes/${routeName}.tsx`)
+      await assert.fileNotContains(
+        `resources/react_router_app/routes/${routeName}.tsx`,
+        route.codeMatch
+      )
     })
   }).tags(['@active'])
 })
