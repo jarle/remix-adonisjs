@@ -1,6 +1,6 @@
 /// <reference types="@adonisjs/vite/vite_provider" />
 
-import type { RequestHandler } from '../src/remix_adapter.js'
+import type { RequestHandler } from '../src/react_router_adapter.js'
 
 import { HttpContext } from '@adonisjs/core/http'
 import type { ApplicationService } from '@adonisjs/core/types'
@@ -23,11 +23,11 @@ export default class RemixProvider {
   private remixBundle: string
 
   constructor(protected app: ApplicationService) {
-    this.remixBundle = app.makeURL('remix/server/server.js').href
+    this.remixBundle = app.makeURL('react-router/server/server.js').href
   }
 
   async boot() {
-    const { createRequestHandler } = await import('../src/remix_adapter.js')
+    const { createRequestHandler } = await import('../src/react_router_adapter.js')
     const env = this.app.getEnvironment()
     if (env !== 'web' && env !== 'test') {
       return

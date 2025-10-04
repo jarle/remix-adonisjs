@@ -1,3 +1,3 @@
 import { debuglog } from 'node:util'
 
-export default debuglog('matstack:remix-adonisjs')
+export default debuglog('matstack:react-adonisjs')

@@ -11,8 +11,8 @@ import {
   createRequestHandler as createRemixRequestHandler,
 } from 'react-router'
 
-import { Readable } from 'node:stream'
 import { createReadableStreamFromReadable } from '@react-router/node'
+import { Readable } from 'node:stream'
 import debug from './debug.js'
 
 export type HandlerContext = {
@@ -30,7 +30,7 @@ export type GetLoadContextFunction = (context: HandlerContext) => AppLoadContext
 export type RequestHandler = (context: HandlerContext) => Promise<void>
 
 /**
- * Returns a request handler for AdonisJS that serves the response using Remix.
+ * Returns a request handler for AdonisJS that serves the response using React Router.
  */
 export function createRequestHandler({
   build,
@@ -44,7 +44,7 @@ export function createRequestHandler({
   let handleRequest = createRemixRequestHandler(build, mode)
 
   return async (context: HandlerContext) => {
-    debug(`Creating remix request for ${context.http.request.parsedUrl}`)
+    debug(`Creating react-router request for ${context.http.request.parsedUrl}`)
     const request = createRemixRequest(context.http.request, context.http.response)
     const loadContext = getLoadContext(context)
 
@@ -109,7 +109,7 @@ export async function sendRemixResponse(ctx: HttpContext, webResponse: Response)
     res.status(webResponse.status)
   }
 
-  debug('Commit session early for remix response')
+  debug('Commit session early for react-router response')
   await ctx.session?.commit()
   webResponse.headers.forEach((value, key) => res.append(key, value))
 

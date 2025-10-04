@@ -3,11 +3,11 @@ import { test } from '@japa/runner'
 import { RequestOptions, ResponseOptions, createRequest, createResponse } from 'node-mocks-http'
 import { IncomingMessage, ServerResponse } from 'node:http'
 import supertest from 'supertest'
-import { createRemixRequest } from '../../src/remix_adapter.js'
+import { createRemixRequest } from '../../src/react_router_adapter.js'
 import { httpServer } from './http_server.js'
 
 test.group('createRemixRequest Adapter Tests', () => {
-  test('creates a valid Remix Request for GET method', async ({ assert }) => {
+  test('creates a valid React Router Request for GET method', async ({ assert }) => {
     const { url } = await httpServer.create((req, res) => {
       const remixRequest = createRemixRequest(mergeReqNode(req), mergeResNode(res))
       assert.equal(remixRequest.method, 'GET')
@@ -37,7 +37,7 @@ test.group('createRemixRequest Adapter Tests', () => {
       })
 
       // Handle the request to ensure it's fully established before closing the response
-      req.on('data', () => {}) // Necessary to consume the request stream
+      req.on('data', () => { }) // Necessary to consume the request stream
       req.on('end', () => {
         // Close the response after the request is fully received
         res.destroy()
@@ -83,7 +83,7 @@ test.group('createRemixRequest Adapter Tests', () => {
   })
 })
 
-test.group('Remix Adapter Tests', () => {
+test.group('React Router Adapter Tests', () => {
   test('creates a request with the correct headers', async ({ assert }) => {
     const request = testRequest({
       url: '/foo/bar',

@@ -12,7 +12,7 @@ import getPort from 'get-port'
 import { IncomingMessage, Server, ServerResponse, createServer } from 'node:http'
 import { RequestHandler } from 'react-router'
 import debug from '../../src/debug.js'
-import { createRemixRequest, sendRemixResponse } from '../../src/remix_adapter.js'
+import { createRemixRequest, sendRemixResponse } from '../../src/react_router_adapter.js'
 import { CookieStore } from './cookie.js'
 
 export const httpServer = {
@@ -65,7 +65,7 @@ export const remixHandler = (requestHandler: RequestHandler): Server =>
     ctx.containerResolver.bindValue('session', middleware)
 
     await middleware.handle(ctx, async () => {
-      debug('Creating remix request')
+      debug('Creating react-router request')
       const remixRequest = createRemixRequest(request, response)
 
       debug('Creating request handler')
@@ -76,7 +76,7 @@ export const remixHandler = (requestHandler: RequestHandler): Server =>
 
       ctx.session.commit()
 
-      debug('Sending remix response')
+      debug('Sending react-router response')
       await sendRemixResponse(ctx, foo)
     })
 

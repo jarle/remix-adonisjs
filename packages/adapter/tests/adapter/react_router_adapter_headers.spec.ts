@@ -2,7 +2,7 @@ import { RequestFactory, ResponseFactory } from '@adonisjs/core/factories/http'
 import { test } from '@japa/runner'
 import { RequestOptions, ResponseOptions, createRequest, createResponse } from 'node-mocks-http'
 import { IncomingMessage, ServerResponse } from 'node:http'
-import { createRemixHeaders, createRemixRequest } from '../../src/remix_adapter.js'
+import { createRemixHeaders, createRemixRequest } from '../../src/react_router_adapter.js'
 
 test.group('createRemixHeaders', () => {
   test('handles empty headers', ({ expect }) => {
@@ -52,7 +52,7 @@ test.group('createRemixHeaders', () => {
   })
 })
 
-test.group('Remix Adapter Tests', () => {
+test.group('React Router Adapter Tests', () => {
   test('creates a request with the correct headers', async ({ assert }) => {
     const request = testRequest({
       url: '/foo/bar',

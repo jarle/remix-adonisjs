@@ -5,7 +5,7 @@ import supertest from 'supertest'
 import { cookieClient, remixHandler } from './http_server.js'
 
 test.group('Session', () => {
-  test('commit session early for remix request', async ({ assert }) => {
+  test('commit session early for react-router request', async ({ assert }) => {
     let sessionId: string | undefined
 
     const remixServer = remixHandler(async (_request, context) => {
