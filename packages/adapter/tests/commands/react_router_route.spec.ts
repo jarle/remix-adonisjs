@@ -16,9 +16,9 @@ test.group('Create react-router route from stub', (group) => {
     const command = await ace.create(MakeReactRouterRoute, ['login'])
     await command.exec()
 
-    command.assertLog('green(DONE:)    create resources/remix_app/routes/login.tsx')
+    command.assertLog('green(DONE:)    create resources/react_router_app/routes/login.tsx')
     await assert.fileContains(
-      'resources/remix_app/routes/login.tsx',
+      'resources/react_router_app/routes/login.tsx',
       'export default function Page() {'
     )
   })
@@ -71,8 +71,11 @@ test.group('Create react-router route from stub', (group) => {
       const command = await ace.create(MakeReactRouterRoute, [routeName, `--${route.flag}`])
       await command.exec()
 
-      command.assertLog(`green(DONE:)    create resources/remix_app/routes/${routeName}.tsx`)
-      await assert.fileContains(`resources/remix_app/routes/${routeName}.tsx`, route.codeMatch)
+      command.assertLog(`green(DONE:)    create resources/react_router_app/routes/${routeName}.tsx`)
+      await assert.fileContains(
+        `resources/react_router_app/routes/${routeName}.tsx`,
+        route.codeMatch
+      )
     })
 
     // negative test
@@ -81,8 +84,11 @@ test.group('Create react-router route from stub', (group) => {
       const command = await ace.create(MakeReactRouterRoute, [routeName, `--${route.flag}=false`])
       await command.exec()
 
-      command.assertLog(`green(DONE:)    create resources/remix_app/routes/${routeName}.tsx`)
-      await assert.fileNotContains(`resources/remix_app/routes/${routeName}.tsx`, route.codeMatch)
+      command.assertLog(`green(DONE:)    create resources/react_router_app/routes/${routeName}.tsx`)
+      await assert.fileNotContains(
+        `resources/react_router_app/routes/${routeName}.tsx`,
+        route.codeMatch
+      )
     })
   }).tags(['@active'])
 })

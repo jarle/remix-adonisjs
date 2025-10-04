@@ -8,7 +8,9 @@ import path from 'node:path'
  *
  * The hook is responsible for launching the react-router build command when the application is built
  */
-export default async function remixBuildHook({ logger }: Parameters<AssemblerHookHandler>[0]) {
+export default async function reactRouterBuildHook({
+  logger,
+}: Parameters<AssemblerHookHandler>[0]) {
   logger.info('building React Router app with vite')
   await execa('react-router', ['build'], {
     preferLocal: true, // use ./node_modules/.bin/react-router

@@ -41,6 +41,6 @@ export async function configure(command: Configure) {
 
   await codemods.updateRcFile((rcFile) => {
     rcFile.addCommand('@matstack/react-adonisjs/commands')
-    rcFile.addProvider('@matstack/react-adonisjs/remix_provider')
+    rcFile.addProvider('@matstack/react-adonisjs/react_router_provider')
   })
 }

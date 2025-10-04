@@ -25,7 +25,7 @@
   "exports": {
     ".": "./build/index.js",
     "./commands": "./build/commands/main.js",
-    "./remix_provider": "./build/providers/remix_provider.js",
+    "./react_router_provider": "./build/providers/react_router_provider.js",
     "./build_hook": "./build/src/hooks/build_hook.js",
     "./types": "./build/src/types/main.js"
   },

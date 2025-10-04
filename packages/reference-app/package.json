@@ -91,7 +91,7 @@
     ],
     "ignore": [
       "node_modules/**",
-      "resources/remix_app/**",
+      "resources/react_router_app/**",
       "vite.config.ts.timestamp*"
     ]
   }

@@ -40,7 +40,7 @@ export default defineConfig({
     () => import('@adonisjs/auth/auth_provider'),
     () => import('@adonisjs/static/static_provider'),
     () => import('@adonisjs/vite/vite_provider'),
-    () => import('@matstack/react-adonisjs/remix_provider'),
+    () => import('@matstack/react-adonisjs/react_router_provider'),
   ],
 
   /*

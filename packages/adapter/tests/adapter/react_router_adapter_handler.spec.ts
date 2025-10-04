@@ -3,14 +3,14 @@ import { test } from '@japa/runner'
 import { RequestOptions, ResponseOptions, createRequest, createResponse } from 'node-mocks-http'
 import { IncomingMessage, ServerResponse } from 'node:http'
 import supertest from 'supertest'
-import { createRemixRequest } from '../../src/react_router_adapter.js'
+import { createReactRouterRequest } from '../../src/react_router_adapter.js'
 import { httpServer } from './http_server.js'
 
-test.group('createRemixRequest Adapter Tests', () => {
+test.group('createReactRouterRequest Adapter Tests', () => {
   test('creates a valid React Router Request for GET method', async ({ assert }) => {
     const { url } = await httpServer.create((req, res) => {
-      const remixRequest = createRemixRequest(mergeReqNode(req), mergeResNode(res))
-      assert.equal(remixRequest.method, 'GET')
+      const reactRouterRequest = createReactRouterRequest(mergeReqNode(req), mergeResNode(res))
+      assert.equal(reactRouterRequest.method, 'GET')
       res.end()
     })
 
@@ -19,9 +19,9 @@ test.group('createRemixRequest Adapter Tests', () => {
 
   test('correctly handles non-GET/HEAD requests', async ({ assert }) => {
     const { url } = await httpServer.create((req, res) => {
-      const remixRequest = createRemixRequest(mergeReqNode(req), mergeResNode(res))
-      assert.equal(remixRequest.method, 'POST')
-      assert.equal(remixRequest.headers.get('content-type'), 'application/json')
+      const reactRouterRequest = createReactRouterRequest(mergeReqNode(req), mergeResNode(res))
+      assert.equal(reactRouterRequest.method, 'POST')
+      assert.equal(reactRouterRequest.headers.get('content-type'), 'application/json')
       res.end()
     })
 
@@ -30,9 +30,9 @@ test.group('createRemixRequest Adapter Tests', () => {
 
   test('aborts the request when the response is closed', async (_params, done) => {
     const { url } = await httpServer.create((req, res) => {
-      const remixRequest = createRemixRequest(mergeReqNode(req), mergeResNode(res))
+      const reactRouterRequest = createReactRouterRequest(mergeReqNode(req), mergeResNode(res))
 
-      remixRequest.signal.addEventListener('abort', () => {
+      reactRouterRequest.signal.addEventListener('abort', () => {
         done()
       })
 
@@ -50,9 +50,9 @@ test.group('createRemixRequest Adapter Tests', () => {
   test('handles cloned readable stream without memory leaks', async ({ assert }) => {
     const { url } = await httpServer.create((req, res) => {
       req.method = 'POST'
-      const remixRequest = createRemixRequest(mergeReqNode(req), mergeResNode(res))
+      const reactRouterRequest = createReactRouterRequest(mergeReqNode(req), mergeResNode(res))
 
-      const reader = remixRequest.body!.getReader()
+      const reader = reactRouterRequest.body!.getReader()
       let chunks = []
       reader.read().then(function processText({ done, value }): Promise<void> {
         if (done) {
@@ -74,8 +74,8 @@ test.group('createRemixRequest Adapter Tests', () => {
 
   test('ensures URL is correctly formed', async ({ assert }) => {
     const { url } = await httpServer.create((req, res) => {
-      const remixRequest = createRemixRequest(mergeReqNode(req), mergeResNode(res))
-      assert.equal(remixRequest.url, `http://${req.headers.host}${req.url}`)
+      const reactRouterRequest = createReactRouterRequest(mergeReqNode(req), mergeResNode(res))
+      assert.equal(reactRouterRequest.url, `http://${req.headers.host}${req.url}`)
       res.end()
     })
 
@@ -97,11 +97,11 @@ test.group('React Router Adapter Tests', () => {
     })
 
     const response = testResponse()
-    const remixRequest = createRemixRequest(request, response)
+    const reactRouterRequest = createReactRouterRequest(request, response)
 
-    assert.equal(remixRequest.method, 'GET')
-    assert.equal(remixRequest.headers.get('cache-control'), 'max-age=300, s-maxage=3600')
-    assert.equal(remixRequest.headers.get('host'), 'localhost:3000')
+    assert.equal(reactRouterRequest.method, 'GET')
+    assert.equal(reactRouterRequest.headers.get('cache-control'), 'max-age=300, s-maxage=3600')
+    assert.equal(reactRouterRequest.headers.get('host'), 'localhost:3000')
   })
 })
 

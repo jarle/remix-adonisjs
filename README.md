@@ -26,14 +26,14 @@ Just jump into your new folder and start the dev server with `npm run dev`.
 You can create new React Router routes with the command:
 
 ```
-node ace remix:route my-route
+node ace react:route my-route
 ```
 
 There are flags for including React Router-specific functionality in the route.
 Example for adding a server action:
 
 ```
-node ace remix:route --action my-route
+node ace react:route --action my-route
 ```
 
 Ready to build?

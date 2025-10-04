@@ -8,7 +8,7 @@ import type { Request as AdonisRequest, Response as AdonisResponse } from '@adon
 import {
   AppLoadContext,
   ServerBuild,
-  createRequestHandler as createRemixRequestHandler,
+  createRequestHandler as createReactRouterRequestHandler,
 } from 'react-router'
 
 import { createReadableStreamFromReadable } from '@react-router/node'
@@ -41,20 +41,20 @@ export function createRequestHandler({
   getLoadContext: GetLoadContextFunction
   mode?: string
 }): RequestHandler {
-  let handleRequest = createRemixRequestHandler(build, mode)
+  let handleRequest = createReactRouterRequestHandler(build, mode)
 
   return async (context: HandlerContext) => {
     debug(`Creating react-router request for ${context.http.request.parsedUrl}`)
-    const request = createRemixRequest(context.http.request, context.http.response)
+    const request = createReactRouterRequest(context.http.request, context.http.response)
     const loadContext = getLoadContext(context)
 
     const response = await handleRequest(request, loadContext)
 
-    sendRemixResponse(context.http, response)
+    sendReactRouterResponse(context.http, response)
   }
 }
 
-export function createRemixHeaders(requestHeaders: IncomingHttpHeaders): Headers {
+export function createReactRouterHeaders(requestHeaders: IncomingHttpHeaders): Headers {
   const headers = new Headers()
 
   for (let [key, values] of Object.entries(requestHeaders)) {
@@ -71,7 +71,7 @@ export function createRemixHeaders(requestHeaders: IncomingHttpHeaders): Headers
   return headers
 }
 
-export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Request {
+export function createReactRouterRequest(req: AdonisRequest, res: AdonisResponse): Request {
   const url = new URL(req.completeUrl(true))
 
   // Abort action/loaders once we can no longer write a response
@@ -84,7 +84,7 @@ export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Req
 
   const init: RequestInit = {
     method: req.method(),
-    headers: createRemixHeaders(req.headers()),
+    headers: createReactRouterHeaders(req.headers()),
     signal: controller.signal,
   }
 
@@ -102,7 +102,7 @@ export function createRemixRequest(req: AdonisRequest, res: AdonisResponse): Req
   return new Request(url.href, init)
 }
 
-export async function sendRemixResponse(ctx: HttpContext, webResponse: Response) {
+export async function sendReactRouterResponse(ctx: HttpContext, webResponse: Response) {
   const res = ctx.response
   res.response.statusMessage = webResponse.statusText
   if (res.getStatus() === 200) {
