@@ -103,10 +103,16 @@ export function createReactRouterRequest(req: AdonisRequest, res: AdonisResponse
 }
 
 export async function sendReactRouterResponse(ctx: HttpContext, webResponse: Response) {
+  const req = ctx.request
   const res = ctx.response
   res.response.statusMessage = webResponse.statusText
   if (res.getStatus() === 200) {
     res.status(webResponse.status)
+  }
+  // https://github.com/remix-run/react-router/discussions/12693#discussioncomment-12926533
+  if (req.url().endsWith(".data") && res.getStatus() === 302) {
+    res.status(204)
+    res.header('X-Remix-Redirect', res.getHeader('location')!)
   }
 
   debug('Commit session early for react-router response')
