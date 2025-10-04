@@ -11,17 +11,17 @@ export default function Index() {
       <h2>...powered by AdonisJS 😎</h2>
       <ul>
         <li>
-          <a target="_blank" href="https://react-router.run/tutorials/blog" rel="noreferrer">
-            15m Quickstart Blog Tutorial
+          <a target="_blank" href="https://matstack.dev/react-adonisjs/" rel="noreferrer">
+            react-adonisjs Docs
           </a>
         </li>
         <li>
-          <a target="_blank" href="https://react-router.run/tutorials/jokes" rel="noreferrer">
-            Deep Dive Jokes App Tutorial
+          <a target="_blank" href="https://docs.adonisjs.com/" rel="noreferrer">
+            AdonisJS Docs
           </a>
         </li>
         <li>
-          <a target="_blank" href="https://react-router.run/docs" rel="noreferrer">
+          <a target="_blank" href="https://reactrouter.com/" rel="noreferrer">
             React Router Docs
           </a>
         </li>
