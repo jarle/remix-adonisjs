@@ -1,7 +1,7 @@
 {
   "name": "@matstack/react-adonisjs",
   "description": "An adapter for using React Router with AdonisJS",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "engines": {
     "node": ">=20.10.0"
   },

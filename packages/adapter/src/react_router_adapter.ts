@@ -110,7 +110,7 @@ export async function sendReactRouterResponse(ctx: HttpContext, webResponse: Res
     res.status(webResponse.status)
   }
   // https://github.com/remix-run/react-router/discussions/12693#discussioncomment-12926533
-  if (req.url().endsWith(".data") && res.getStatus() === 302) {
+  if (req.url().endsWith('.data') && res.getStatus() === 302) {
     res.status(204)
     res.header('X-Remix-Redirect', res.getHeader('location')!)
   }
