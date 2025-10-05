@@ -13,6 +13,8 @@ concurrency:
 jobs:
   linux:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.55.0-noble
     strategy:
       matrix:
         node-version: ["lts/jod"]
@@ -37,8 +39,6 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install
         run: pnpm install
-      - name: Install playwright browsers
-        run: pnpm --filter reference-app exec playwright install --with-deps
       - name: Build
         run: pnpm run build
       - name: Run tests
