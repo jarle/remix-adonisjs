@@ -41,7 +41,7 @@
     "postcompile": "pnpm run copy:templates && pnpm run copy:readme && pnpm run index:commands",
     "prepublishOnly": "pnpm run lint && pnpm run build",
     "release": "pnpm version patch --force && pnpm publish",
-    "test": "cross-env NODE_DEBUG=adonisjs:*,matstack:* NODE_ENV=test node --loader ts-node/esm --enable-source-maps bin/test.ts",
+    "test": "cross-env NODE_DEBUG=matstack:* NODE_ENV=test node --loader ts-node/esm --enable-source-maps bin/test.ts",
     "typecheck": "tsc --noEmit",
     "index:commands": "adonis-kit index build/commands"
   },
