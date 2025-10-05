@@ -63,13 +63,7 @@ export function headers({ }: Route.HeadersArgs) {
 }
 {{/if}}
 
-export default function Page() {
-{{#if flags.loader}}
-  const data = useLoaderData<typeof loader>()
-{{/if}}
-{{#if flags.action}}
-  const actionData = useActionData<typeof action>()
-{{/if}}
+export default function Page({ }: Route.ComponentProps) {
   return <div>New route</div>
 }
 {{#if flags['error-boundary']}}

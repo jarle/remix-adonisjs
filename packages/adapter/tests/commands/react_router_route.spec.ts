@@ -19,7 +19,7 @@ test.group('Create react-router route from stub', (group) => {
     command.assertLog('green(DONE:)    create resources/react_app/routes/login.tsx')
     await assert.fileContains(
       'resources/react_app/routes/login.tsx',
-      'export default function Page() {'
+      'export default function Page({}: Route.ComponentProps) {'
     )
   })
 
