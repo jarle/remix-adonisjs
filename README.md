@@ -2,7 +2,7 @@
 
 Sponsored by [SummYT.app](https://summyt.app)
 
-**react-adonisjs** (previously react-adonisjs) includes all the amazing features you love from React Router, plus support for production-grade:
+**react-adonisjs** (previously remix-adonisjs) includes all the amazing features you love from React Router, plus support for production-grade:
 
 - Database ORM and migrations
 - Authentication
