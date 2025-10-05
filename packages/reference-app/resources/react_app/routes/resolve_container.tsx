@@ -1,4 +1,3 @@
-import { useLoaderData } from 'react-router'
 import type { Route } from './+types/resolve_container.js'
 
 export const loader = async ({ context }: Route.LoaderArgs) => {
@@ -8,7 +7,6 @@ export const loader = async ({ context }: Route.LoaderArgs) => {
   }
 }
 
-export default function Page() {
-  const { env } = useLoaderData<typeof loader>()
-  return <p>{env}</p>
+export default function Page({ loaderData }: Route.ComponentProps) {
+  return <p>{loaderData.env}</p>
 }

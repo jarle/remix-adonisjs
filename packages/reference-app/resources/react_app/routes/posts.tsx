@@ -1,5 +1,6 @@
-import { Await, useLoaderData } from 'react-router'
 import { Suspense } from 'react'
+import { Await } from 'react-router'
+import { Route } from './+types/posts.js'
 
 export const loader = async () => {
   // simulate a slow loader
@@ -12,8 +13,7 @@ export const loader = async () => {
   }
 }
 
-export default function Page() {
-  const { lazyPosts } = useLoaderData<typeof loader>()
+export default function Page({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <h1>Posts</h1>
@@ -24,7 +24,7 @@ export default function Page() {
           </div>
         }
       >
-        <Await resolve={lazyPosts}>
+        <Await resolve={loaderData.lazyPosts}>
           {(posts) =>
             posts.map((p) => (
               <div className="post" key={p}>

@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router'
+import { Route } from './+types/profile.js'
 
 export const loader = () => {
   return {
@@ -7,8 +7,8 @@ export const loader = () => {
   }
 }
 
-export default function Page() {
-  const { userName, email } = useLoaderData<typeof loader>()
+export default function Page({ loaderData }: Route.ComponentProps) {
+  const { userName, email } = loaderData
   return (
     <div>
       <h1>Profile</h1>

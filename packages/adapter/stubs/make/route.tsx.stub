@@ -28,7 +28,7 @@ export async function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {
   const serverData = await serverLoader();
   // And/or fetch data on the client
   const data = getDataFromClient();
-  // Return the data to expose through useLoaderData()
+  // Return the data to expose through clientLoaderData
   return data;
 }
 {{/if}}

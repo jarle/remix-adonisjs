@@ -1,4 +1,5 @@
-import { Form, useActionData } from 'react-router'
+import { Form } from 'react-router'
+import { Route } from './+types/feedback.js'
 
 export const action = () => {
   return {
@@ -6,9 +7,7 @@ export const action = () => {
   }
 }
 
-export default function Page() {
-  const actionData = useActionData<typeof action>()
-
+export default function Page({ actionData }: Route.ComponentProps) {
   return (
     <>
       <h1>Feedback</h1>

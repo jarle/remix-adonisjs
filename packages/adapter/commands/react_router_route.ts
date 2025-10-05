@@ -1,4 +1,5 @@
 import { BaseCommand, args, flags } from '@adonisjs/core/ace'
+import { execa } from 'execa'
 import { stubsRoot } from '../index.js'
 
 export default class MakeReactRouterRoute extends BaseCommand {
@@ -70,14 +71,12 @@ export default class MakeReactRouterRoute extends BaseCommand {
 
     if (this.action) {
       localType.add('Route')
-      router.add('useActionData')
     }
     if (this.clientAction) {
       localType.add('Route')
     }
     if (this.loader) {
       localType.add('Route')
-      router.add('useLoaderData')
     }
     if (this.clientLoader) {
       localType.add('Route')
@@ -108,6 +107,10 @@ export default class MakeReactRouterRoute extends BaseCommand {
         localType: [...imports.localType].join(', '),
         router: [...imports.router].join(', '),
       },
+    })
+    await execa('react-router', ['typegen'], {
+      preferLocal: true,
+      stdio: 'inherit',
     })
   }
 }

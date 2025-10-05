@@ -1,4 +1,3 @@
-import { useLoaderData } from 'react-router'
 import type { Route } from './+types/echo.js'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
@@ -9,12 +8,11 @@ export const loader = ({ request }: Route.LoaderArgs) => {
   }
 }
 
-export default function Page() {
-  const { message } = useLoaderData<typeof loader>()
+export default function Page({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <h1>Echo</h1>
-      <p id="message">{message}</p>
+      <p id="message">{loaderData.message}</p>
     </>
   )
 }
