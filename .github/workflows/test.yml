@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.55.0-noble
+      options: --ipc=host
     strategy:
       matrix:
         node-version: ["lts/jod"]

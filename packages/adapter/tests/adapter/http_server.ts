@@ -26,10 +26,11 @@ export const httpServer = {
       server.close()
     })
 
-    const port = await getPort({ port: 3132 })
-    return new Promise<{ server: Server; url: string; port: number }>((resolve) => {
-      server.listen(port, 'localhost', () => {
-        return resolve({ server, port, url: `http://localhost:${port}` })
+    const port = await getPort({ port: 61842 })
+    return new Promise<{ server: Server; url: string; port: number }>((resolve, reject) => {
+      server.on('error', reject)
+      server.listen(port, '127.0.0.1', () => {
+        return resolve({ server, port, url: `http://127.0.0.1:${port}` })
       })
     })
   },
