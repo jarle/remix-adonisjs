@@ -4,4 +4,7 @@ import devtoolsJson from 'vite-plugin-devtools-json';
 
 export default defineConfig({
   plugins: [reactRouter(), devtoolsJson()],
+  ssr: {
+    external: ['@matstack/react-adonisjs/context'],
+  },
 })

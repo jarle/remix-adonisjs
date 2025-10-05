@@ -26,6 +26,7 @@
     ".": "./build/index.js",
     "./commands": "./build/commands/main.js",
     "./react_router_provider": "./build/providers/react_router_provider.js",
+    "./context": "./build/src/context.js",
     "./build_hook": "./build/src/hooks/build_hook.js",
     "./types": "./build/src/types/main.js"
   },

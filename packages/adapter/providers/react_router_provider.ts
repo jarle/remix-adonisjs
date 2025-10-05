@@ -5,6 +5,7 @@ import type { RequestHandler } from '../src/react_router_adapter.js'
 import { HttpContext } from '@adonisjs/core/http'
 import type { ApplicationService } from '@adonisjs/core/types'
 import { RouterContextProvider } from 'react-router'
+import { adonisContext } from '../src/context.js'
 import '../src/types/main.js'
 
 declare module '@adonisjs/core/types' {
@@ -47,6 +48,10 @@ export default class ReactRouterProvider {
         const ctx = new RouterContextProvider()
         // avoid breaking changes by using the migration strategy from https://reactrouter.com/how-to/middleware#migration-from-apploadcontext
         Object.assign(ctx, {
+          http: context.http,
+          make: context.container.make.bind(context.container),
+        })
+        ctx.set(adonisContext, {
           http: context.http,
           make: context.container.make.bind(context.container),
         })
