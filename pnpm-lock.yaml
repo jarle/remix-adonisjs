@@ -18,10 +18,13 @@ importers:
         specifier: ^6.8.3
         version: 6.10.1
       '@react-router/node':
-        specifier: ^7.0.0
+        specifier: ^7.9.0
         version: 7.9.1(react-router@7.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(typescript@5.7.3)
+      execa:
+        specifier: ^9.6.0
+        version: 9.6.0
       react-router:
-        specifier: ^7.0.0
+        specifier: ^7.9.0
         version: 7.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@adonisjs/core':
@@ -84,9 +87,6 @@ importers:
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
-      execa:
-        specifier: ^9.6.0
-        version: 9.6.0
       get-port:
         specifier: ^7.1.0
         version: 7.1.0
