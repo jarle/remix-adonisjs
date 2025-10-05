@@ -108,6 +108,8 @@ export default class MakeReactRouterRoute extends BaseCommand {
         router: [...imports.router].join(', '),
       },
     })
+    if (process.env.NODE_ENV === 'test') return
+
     await execa('react-router', ['typegen'], {
       preferLocal: true,
       stdio: 'inherit',
