@@ -1,10 +1,10 @@
 {{{
-  exports({ to: app.makePath('resources/react_router_app/react-router.config.ts') })
+  exports({ to: app.makePath('resources/react_app/react-router.config.ts') })
 }}}
 import type { Config } from '@react-router/dev/config'
 export default {
   ssr: true,
-  appDirectory: 'resources/react_router_app',
+  appDirectory: 'resources/react_app',
   buildDirectory: 'build/react-router',
   serverBuildFile: 'server.js',
 } satisfies Config

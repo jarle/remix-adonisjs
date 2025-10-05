@@ -1,5 +1,5 @@
 {{{
-  exports({ to: app.makePath('resources/react_router_app/app.css') })
+  exports({ to: app.makePath('resources/react_app/app.css') })
 }}}
 @tailwind base;
 @tailwind components;
