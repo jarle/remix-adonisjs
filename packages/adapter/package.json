@@ -20,7 +20,8 @@
     "build/index.js",
     "build/configure.d.ts",
     "build/configure.d.ts.map",
-    "build/configure.js"
+    "build/configure.js",
+    "README.md"
   ],
   "exports": {
     ".": "./build/index.js",
@@ -36,7 +37,7 @@
     "compile": "pnpm run clean && tsc",
     "dev": "tsc --watch --preserveWatchOutput",
     "copy:templates": "copyfiles \"stubs/**/**/*.stub\" build",
-    "copy:readme": "copyfiles -u 2 \"../../*.md\" build",
+    "copy:readme": "copyfiles -f \"../../README.md\" .",
     "format": "prettier --write .",
     "lint": "eslint . --ext=.ts",
     "postcompile": "pnpm run copy:templates && pnpm run copy:readme && pnpm run index:commands",
